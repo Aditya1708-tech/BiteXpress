@@ -22,7 +22,7 @@ const menuItems = [
       price: 249, 
       image: "images/pasta.jpg",
       description: "Italian pasta with rich tomato sauce",
-      category: "main"
+      category: "sides"
     },
     { 
       id: 4, 

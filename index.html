@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiteXpress</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+      <li><a href="account.html"><i class="fas fa-user"></i> Account</a></li>
+      <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+
+  <div class="menu" id="menu"></div>
+
+  <div class="cart">
+    <h2>Your Cart <span class="close-cart">&times;</span></h2>
+    <ul id="cartList"></ul>
+    <div class="cart-total">
+      <span id="total">Total: ₹0.00</span>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Checkout</h2>
+      
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="modalCartList"></div>
+        <div class="modal-total">
+          <span id="modalTotal">Total: ₹0.00</span>
+        </div>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <h3>Delivery Address</h3>
+          <input type="text" id="fullName" placeholder="Full Name" required>
+          <input type="tel" id="phone" placeholder="Phone Number" required>
+          <textarea id="address" placeholder="Delivery Address" required></textarea>
+          <input type="text" id="pincode" placeholder="Pincode" required>
+        </div>
+
+        <div class="form-group">
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <label>
+              <input type="radio" name="payment" value="cash" checked>
+              Cash on Delivery
+            </label>
+            <label>
+              <input type="radio" name="payment" value="card">
+              Credit/Debit Card
+            </label>
+            <label>
+              <input type="radio" name="payment" value="upi">
+              UPI
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact Us Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-contact">&times;</span>
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <input type="text" id="contactName" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="contactEmail" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="contactSubject" placeholder="Subject" required>
+        </div>
+        <div class="form-group">
+          <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>BiteXpress delivers delicious food right to your doorstep. Enjoy the best dining experience with our quality service.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Order Now</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Info</h4>
+        <ul>
+          <li><i class="fas fa-phone"></i> +91 123-456-7890</li>
+          <li><i class="fas fa-envelope"></i> info@bitxpress.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 123 Food Street, City, State</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 BiteXpress. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

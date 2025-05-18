@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukhsagar Pizz Hub - Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+            <li><a href="../account.html"><i class="fas fa-user"></i> Account</a></li>
+            <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <section class="restaurant-header">
+        <div class="restaurant-info">
+            <img src="logo.avif" alt="Sukhsagar Pizza Hub" class="restaurant-logo">
+            <h1>Sukhsagar Pizza Hub</h1>
+            <p class="restaurant-description">Experience delicious fast food and beverages in a vibrant setting. Our menu features a wide variety of burgers, sandwiches, fries, and momos made with fresh ingredients.</p>
+            <div class="restaurant-features">
+                <span><i class="fas fa-star"></i> 4.3 Rating</span>
+                <span><i class="fas fa-clock"></i> 10:00 AM - 10:00 PM</span>
+                <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2>Our Menu</h2>
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="all">All Items</button>
+            <button class="category-btn" data-category="burgers">Burgers</button>
+            <button class="category-btn" data-category="sandwiches">Sandwiches</button>
+            <button class="category-btn" data-category="fries">Fries</button>
+            <button class="category-btn" data-category="momos">Momos</button>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Burgers</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Burgers -->
+            <div class="menu-item" data-category="burgers">
+                <img src="menu/veg burger.avif" alt="Veg Burger">
+                <div class="menu-item-details">
+                    <h3>Veg Burger</h3>
+                    <p>Classic vegetable patty with fresh vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹80</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="burgers">
+                <img src="menu/veg cheese burger.jpeg" alt="Veg Cheese Burger">
+                <div class="menu-item-details">
+                    <h3>Veg Cheese Burger</h3>
+                    <p>Vegetable patty with cheese and fresh vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹100</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="burgers">
+                <img src="menu/aloo tikki burger.avif" alt="Aloo Tikki Burger">
+                <div class="menu-item-details">
+                    <h3>Aloo Tikki Burger</h3>
+                    <p>Spiced potato patty with vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹90</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Sandwiches</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Sandwiches -->
+            <div class="menu-item" data-category="sandwiches">
+                <img src="menu/veg grilled sandwich.avif" alt="Veg Grilled Sandwich">
+                <div class="menu-item-details">
+                    <h3>Veg Grilled Sandwich</h3>
+                    <p>Grilled vegetables with special sauce</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹120</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="sandwiches">
+                <img src="menu/paneer grilled sandwich.jpeg" alt="Paneer Grilled Sandwich">
+                <div class="menu-item-details">
+                    <h3>Paneer Grilled Sandwich</h3>
+                    <p>Grilled cottage cheese with vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹140</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Fries</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Fries -->
+            <div class="menu-item" data-category="fries">
+                <img src="menu/salted fries.jpeg" alt="Salted Fries">
+                <div class="menu-item-details">
+                    <h3>Salted Fries</h3>
+                    <p>Crispy potato fries with salt</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹80</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="fries">
+                <img src="menu/masala fries.jpeg" alt="Masala Fries">
+                <div class="menu-item-details">
+                    <h3>Masala Fries</h3>
+                    <p>Spiced potato fries with special masala</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹90</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Momos</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Momos -->
+            <div class="menu-item" data-category="momos">
+                <img src="menu/veg fried momos.jpeg" alt="Veg Fried Momos">
+                <div class="menu-item-details">
+                    <h3>Veg Fried Momos</h3>
+                    <p>Crispy fried vegetable dumplings</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹120</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/paneer fried momos.avif" alt="Paneer Fried Momos">
+                <div class="menu-item-details">
+                    <h3>Paneer Fried Momos</h3>
+                    <p>Crispy fried cottage cheese dumplings</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹140</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <ul id="cartList"></ul>
+        <div class="cart-footer">
+            <div id="cartTotal">Total: ₹0.00</div>
+            <button id="checkoutBtn" disabled>Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Complete Your Order</h2>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <label>
+                            <input type="radio" name="payment" value="cash" required>
+                            Cash on Delivery
+                        </label>
+                        <label>
+                            <input type="radio" name="payment" value="card" required>
+                            Card Payment
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

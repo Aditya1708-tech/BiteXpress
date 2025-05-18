@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Ronak - Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+      <li><a href="../account.html"><i class="fas fa-user"></i> Account</a></li>
+      <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+
+  <section class="restaurant-header">
+    <div class="restaurant-info">
+      <img src="ronak logo.avif" alt="Hotel Ronak" class="restaurant-logo">
+      <h1>Hotel Ronak</h1>
+      <p class="restaurant-description">Experience authentic Indian cuisine in a luxurious setting. Our chefs prepare traditional dishes with a modern twist, using the finest ingredients.</p>
+      <div class="restaurant-features">
+        <span><i class="fas fa-star"></i> 4.5 Rating</span>
+        <span><i class="fas fa-clock"></i> 11:00 AM - 11:00 PM</span>
+        <span><i class="fas fa-rupee-sign"></i> ₹₹₹ (Moderate)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <h2>Our Menu</h2>
+    <div class="menu-categories">
+      <button class="category-btn active" data-category="all">All Items</button>
+      <button class="category-btn" data-category="starters">Starters</button>
+      <button class="category-btn" data-category="main-course">Main Course</button>
+      <button class="category-btn" data-category="desserts">Desserts</button>
+      <button class="category-btn" data-category="beverages">Beverages</button>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Paneer Corner</h3>
+    </div>
+
+    <div class="menu-items" id="menuItems">
+      <div class="menu-item">
+        <img src="menu/paneer kolhapuri.jpg" alt="Paneer Kolhapuri">
+        <div class="menu-item-details">
+          <h3>Paneer Kolhapuri</h3>
+          <p>A rich and spicy Maharashtrian curry made with fresh paneer, aromatic spices, and a special Kolhapuri masala.</p>
+          <div class="menu-item-price">
+            <span class="price">₹350</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/paneer lababdar.jpg" alt="Paneer Lababdar">
+        <div class="menu-item-details">
+          <h3>Paneer Lababdar</h3>
+          <p>A creamy and luxurious North Indian curry with soft paneer cubes in a rich tomato-based gravy, finished with cream and butter.</p>
+          <div class="menu-item-price">
+            <span class="price">₹380</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/butter paneer.jpg" alt="Butter Paneer">
+        <div class="menu-item-details">
+          <h3>Butter Paneer</h3>
+          <p>A classic North Indian delicacy featuring soft paneer cubes in a rich, creamy tomato gravy with a perfect blend of spices and butter.</p>
+          <div class="menu-item-price">
+            <span class="price">₹360</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/paneer malai tikka.jpg" alt="Paneer Malai Tikka">
+        <div class="menu-item-details">
+          <h3>Paneer Malai Tikka</h3>
+          <p>Succulent paneer cubes marinated in a creamy malai mixture, grilled to perfection, and served with mint chutney.</p>
+          <div class="menu-item-price">
+            <span class="price">₹320</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Kaju Special</h3>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="menu/kaju curry.jpg" alt="Kaju Curry">
+        <div class="menu-item-details">
+          <h3>Kaju Curry</h3>
+          <p>A rich and creamy curry made with cashews, aromatic spices, and fresh cream. A perfect blend of nutty flavors and Indian spices.</p>
+          <div class="menu-item-price">
+            <span class="price">₹400</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/kaju masala.jpg" alt="Kaju Masala">
+        <div class="menu-item-details">
+          <h3>Kaju Masala</h3>
+          <p>Whole cashews cooked in a spicy and aromatic masala gravy, garnished with fresh coriander. A royal delicacy for special occasions.</p>
+          <div class="menu-item-price">
+            <span class="price">₹420</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/kaju paneer.jpg" alt="Kaju Paneer">
+        <div class="menu-item-details">
+          <h3>Kaju Paneer</h3>
+          <p>A luxurious combination of fresh paneer and cashews in a rich, creamy gravy. The perfect fusion of two beloved ingredients.</p>
+          <div class="menu-item-price">
+            <span class="price">₹440</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Platters</h3>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="menu/chinese platter.jpg" alt="Chinese Platter">
+        <div class="menu-item-details">
+          <h3>Chinese Platter</h3>
+          <p>A delightful assortment of Chinese favorites including spring rolls, manchurian, noodles, and fried rice. Perfect for sharing or a complete meal.</p>
+          <div class="menu-item-price">
+            <span class="price">₹899</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Biryani's and Rice</h3>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="menu/veg biryani.jpg" alt="Veg Biryani">
+        <div class="menu-item-details">
+          <h3>Veg Biryani</h3>
+          <p>Fragrant basmati rice cooked with fresh vegetables, aromatic spices, and herbs. Served with raita and salan. A classic favorite.</p>
+          <div class="menu-item-price">
+            <span class="price">₹280</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/hyderabadi veg biryani.jpg" alt="Hyderabadi Veg Biryani">
+        <div class="menu-item-details">
+          <h3>Hyderabadi Veg Biryani</h3>
+          <p>A royal vegetarian delight prepared with premium basmati rice, fresh vegetables, and authentic Hyderabadi spices. Served with mirchi ka salan and raita.</p>
+          <div class="menu-item-price">
+            <span class="price">₹320</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/chicken biryani.jpg" alt="Chicken Biryani">
+        <div class="menu-item-details">
+          <h3>Chicken Biryani</h3>
+          <p>Tender chicken pieces marinated and cooked with aromatic rice and special blend of spices. A flavorful classic served with raita.</p>
+          <div class="menu-item-price">
+            <span class="price">₹380</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/chicken handi biryani.jpg" alt="Chicken Handi Biryani">
+        <div class="menu-item-details">
+          <h3>Chicken Handi Biryani</h3>
+          <p>A special preparation cooked in a traditional handi, giving it a unique earthy flavor. Served with special gravy and raita.</p>
+          <div class="menu-item-price">
+            <span class="price">₹420</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/mutton biryani.jpg" alt="Mutton Biryani">
+        <div class="menu-item-details">
+          <h3>Mutton Biryani</h3>
+          <p>Succulent pieces of mutton cooked with finest basmati rice and signature spice blend. A rich and aromatic delicacy.</p>
+          <div class="menu-item-price">
+            <span class="price">₹450</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/mutton handi biryani.jpg" alt="Mutton Handi Biryani">
+        <div class="menu-item-details">
+          <h3>Mutton Handi Biryani</h3>
+          <p>Our signature handi-cooked mutton biryani with tender meat pieces and aromatic rice. Served with special gravy and raita.</p>
+          <div class="menu-item-price">
+            <span class="price">₹480</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart -->
+  <div class="cart">
+    <h2>Your Cart <span class="close-cart">&times;</span></h2>
+    <ul id="cartList"></ul>
+    <div class="cart-total">
+      <span id="total">Total: ₹0.00</span>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Checkout</h2>
+      
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="modalCartList"></div>
+        <div class="modal-total">
+          <span id="modalTotal">Total: ₹0.00</span>
+        </div>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <h3>Delivery Address</h3>
+          <input type="text" id="fullName" placeholder="Full Name" required>
+          <input type="tel" id="phone" placeholder="Phone Number" required>
+          <textarea id="address" placeholder="Delivery Address" required></textarea>
+          <input type="text" id="pincode" placeholder="Pincode" required>
+        </div>
+
+        <div class="form-group">
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <label>
+              <input type="radio" name="payment" value="cash" checked>
+              Cash on Delivery
+            </label>
+            <label>
+              <input type="radio" name="payment" value="card">
+              Credit/Debit Card
+            </label>
+            <label>
+              <input type="radio" name="payment" value="upi">
+              UPI
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dominos - Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+      <li><a href="../account.html"><i class="fas fa-user"></i> Account</a></li>
+      <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+    </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+
+  <section class="restaurant-header">
+    <div class="restaurant-info">
+      <img src="logo.avif" alt="Dominos" class="restaurant-logo">
+      <h1>Dominos</h1>
+      <p class="restaurant-description">Enjoy the world's best pizzas with our signature crust and fresh toppings. Fast delivery and hot, delicious pizzas every time.</p>
+      <div class="restaurant-features">
+        <span><i class="fas fa-star"></i> 4.8 Rating</span>
+        <span><i class="fas fa-clock"></i> 10:00 AM - 12:00 AM</span>
+        <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <h2>Our Menu</h2>
+    <div class="menu-categories">
+      <button class="category-btn active" data-category="all">All Items</button>
+      <button class="category-btn" data-category="veg">Veg Pizzas</button>
+      <button class="category-btn" data-category="non-veg">Non-Veg Pizzas</button>
+      <button class="category-btn" data-category="cheese-burst">Cheese Burst</button>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Veg Pizzas</h3>
+    </div>
+
+    <div class="menu-items" id="menuItems">
+      <div class="menu-item">
+        <img src="menu/Fresh Veggie Pizza.jpg" alt="Fresh Veggie Pizza">
+        <div class="menu-item-details">
+          <h3>Fresh Veggie Pizza</h3>
+          <p>A delightful combination of fresh vegetables including capsicum, onion, tomato, and sweet corn on a crispy crust.</p>
+          <div class="menu-item-price">
+            <span class="price">₹399</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Farmhouse Pizza.jpg" alt="Farmhouse Pizza">
+        <div class="menu-item-details">
+          <h3>Farmhouse Pizza</h3>
+          <p>A hearty pizza loaded with fresh vegetables, mushrooms, and a perfect blend of herbs and spices.</p>
+          <div class="menu-item-price">
+            <span class="price">₹459</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Peppy Paneer Pizza.jpg" alt="Peppy Paneer Pizza">
+        <div class="menu-item-details">
+          <h3>Peppy Paneer Pizza</h3>
+          <p>Chunky paneer with crisp capsicum and spicy red pepper, topped with our signature sauce.</p>
+          <div class="menu-item-price">
+            <span class="price">₹499</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Non-Veg Pizzas</h3>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="menu/Spiced Double Chicken.jpg" alt="Spiced Double Chicken">
+        <div class="menu-item-details">
+          <h3>Spiced Double Chicken</h3>
+          <p>Double the chicken, double the flavor! Loaded with spicy chicken and a perfect blend of herbs.</p>
+          <div class="menu-item-price">
+            <span class="price">₹549</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Pepper Barbecue Chicken Pizza.jpg" alt="Pepper Barbecue Chicken Pizza">
+        <div class="menu-item-details">
+          <h3>Pepper Barbecue Chicken Pizza</h3>
+          <p>Grilled chicken with a smoky barbecue sauce, topped with onions and capsicum.</p>
+          <div class="menu-item-price">
+            <span class="price">₹529</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Blazing Chicken & Paprika Pizza.jpg" alt="Blazing Chicken & Paprika Pizza">
+        <div class="menu-item-details">
+          <h3>Blazing Chicken & Paprika</h3>
+          <p>Spicy chicken with a fiery paprika sauce, perfect for those who love extra heat!</p>
+          <div class="menu-item-price">
+            <span class="price">₹559</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category-heading">
+      <h3>Cheese Burst Pizzas</h3>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="menu/Veggie Paradise Cheese Burst.jpg" alt="Veggie Paradise Cheese Burst">
+        <div class="menu-item-details">
+          <h3>Veggie Paradise Cheese Burst</h3>
+          <p>A paradise of fresh vegetables with an extra layer of cheese bursting with flavor.</p>
+          <div class="menu-item-price">
+            <span class="price">₹599</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Peppy Paneer Cheese Burst.jpg" alt="Peppy Paneer Cheese Burst">
+        <div class="menu-item-details">
+          <h3>Peppy Paneer Cheese Burst</h3>
+          <p>Chunky paneer with an extra layer of cheese that bursts with every bite.</p>
+          <div class="menu-item-price">
+            <span class="price">₹649</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Chicken Sausage Cheese Burst.jpg" alt="Chicken Sausage Cheese Burst">
+        <div class="menu-item-details">
+          <h3>Chicken Sausage Cheese Burst</h3>
+          <p>Juicy chicken sausages with an extra layer of cheese that makes every bite special.</p>
+          <div class="menu-item-price">
+            <span class="price">₹699</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Chicken Pepperoni Cheese Burst.jpg" alt="Chicken Pepperoni Cheese Burst">
+        <div class="menu-item-details">
+          <h3>Chicken Pepperoni Cheese Burst</h3>
+          <p>Classic pepperoni with an extra layer of cheese that bursts with flavor.</p>
+          <div class="menu-item-price">
+            <span class="price">₹729</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="menu/Indi Chicken Tikka Cheese Burst.jpg" alt="Indi Chicken Tikka Cheese Burst">
+        <div class="menu-item-details">
+          <h3>Indi Chicken Tikka Cheese Burst</h3>
+          <p>Indian spiced chicken tikka with an extra layer of cheese that bursts with every bite.</p>
+          <div class="menu-item-price">
+            <span class="price">₹699</span>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart -->
+  <div class="cart">
+    <h2>Your Cart <span class="close-cart">&times;</span></h2>
+    <ul id="cartList"></ul>
+    <div class="cart-total">
+      <span id="total">Total: ₹0.00</span>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Checkout</h2>
+      
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="modalCartList"></div>
+        <div class="modal-total">
+          <span id="modalTotal">Total: ₹0.00</span>
+        </div>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <h3>Delivery Address</h3>
+          <input type="text" id="fullName" placeholder="Full Name" required>
+          <input type="tel" id="phone" placeholder="Phone Number" required>
+          <textarea id="address" placeholder="Delivery Address" required></textarea>
+          <input type="text" id="pincode" placeholder="Pincode" required>
+        </div>
+
+        <div class="form-group">
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <label>
+              <input type="radio" name="payment" value="cash" checked>
+              Cash on Delivery
+            </label>
+            <label>
+              <input type="radio" name="payment" value="card">
+              Credit/Debit Card
+            </label>
+            <label>
+              <input type="radio" name="payment" value="upi">
+              UPI
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html> 

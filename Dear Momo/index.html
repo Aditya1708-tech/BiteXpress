@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Momo - Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+            <li><a href="../account.html"><i class="fas fa-user"></i> Account</a></li>
+            <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <section class="restaurant-header">
+        <div class="restaurant-info">
+            <img src="logo.avif" alt="Dear Momo" class="restaurant-logo">
+            <h1>Dear Momo</h1>
+            <p class="restaurant-description">Experience authentic and innovative momos in a cozy setting. Our chefs prepare delicious dumplings with fresh ingredients and unique flavors.</p>
+            <div class="restaurant-features">
+                <span><i class="fas fa-star"></i> 4.5 Rating</span>
+                <span><i class="fas fa-clock"></i> 11:00 AM - 11:00 PM</span>
+                <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section">
+        <h2>Our Menu</h2>
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="all">All Items</button>
+            <button class="category-btn" data-category="momos">Momos</button>
+            <button class="category-btn" data-category="sides">Sides</button>
+            <button class="category-btn" data-category="desserts">Desserts</button>
+            <button class="category-btn" data-category="beverages">Beverages</button>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Momos Special</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Momos -->
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Veg Steamed Momos [6 Pieces].avif" alt="Veg Steamed Momos">
+                <div class="menu-item-details">
+                    <h3>Veg Steamed Momos</h3>
+                    <p>Delicious steamed dumplings filled with fresh vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹129</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Veg Fried Momos.avif" alt="Veg Fried Momos">
+                <div class="menu-item-details">
+                    <h3>Veg Fried Momos</h3>
+                    <p>Crispy fried dumplings with vegetable filling</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹149</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Tandoori Cheese Momos [6 Pieces].avif" alt="Tandoori Cheese Momos">
+                <div class="menu-item-details">
+                    <h3>Tandoori Cheese Momos</h3>
+                    <p>Cheese-filled momos with tandoori spices</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹169</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Veg Pizza Momos [6 Pieces].avif" alt="Veg Pizza Momos">
+                <div class="menu-item-details">
+                    <h3>Veg Pizza Momos</h3>
+                    <p>Pizza-flavored momos with cheese and vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹179</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Veg Fried Cheese Momos [6 Pieces].avif" alt="Veg Fried Cheese Momos">
+                <div class="menu-item-details">
+                    <h3>Veg Fried Cheese Momos</h3>
+                    <p>Crispy fried momos with cheese and vegetables</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹189</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="momos">
+                <img src="menu/Spicy Schezwan Momos [6 Pieces].jpg" alt="Spicy Schezwan Momos">
+                <div class="menu-item-details">
+                    <h3>Spicy Schezwan Momos</h3>
+                    <p>Spicy momos with schezwan sauce</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹159</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Sides & More</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Sides -->
+            <div class="menu-item" data-category="sides">
+                <img src="menu/Plain Salted French Fries.jpeg" alt="Plain Salted French Fries">
+                <div class="menu-item-details">
+                    <h3>Plain Salted French Fries</h3>
+                    <p>Crispy golden fries with salt</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="sides">
+                <img src="menu/Peri Peri Fries.jpeg" alt="Peri Peri Fries">
+                <div class="menu-item-details">
+                    <h3>Peri Peri Fries</h3>
+                    <p>Spicy peri peri seasoned fries</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹119</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category-heading">
+            <h3>Desserts & Beverages</h3>
+        </div>
+
+        <div class="menu-items">
+            <!-- Desserts -->
+            <div class="menu-item" data-category="desserts">
+                <img src="menu/Brownie Blast.jpeg" alt="Brownie Blast">
+                <div class="menu-item-details">
+                    <h3>Brownie Blast</h3>
+                    <p>Rich chocolate brownie with ice cream</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹149</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="menu-item" data-category="beverages">
+                <img src="menu/Cold Coffee.jpeg" alt="Cold Coffee">
+                <div class="menu-item-details">
+                    <h3>Cold Coffee</h3>
+                    <p>Creamy cold coffee with ice cream</p>
+                    <div class="menu-item-price">
+                        <span class="price">₹129</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart">
+        <h2>
+            Your Cart
+            <span class="close-cart">&times;</span>
+        </h2>
+        <ul id="cartList"></ul>
+        <div class="cart-total">
+            <span id="cartTotal">Total: ₹0.00</span>
+            <button id="checkoutBtn" class="checkout-btn" disabled>Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Checkout</h2>
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div id="modalCartList"></div>
+                <div id="modalTotal"></div>
+            </div>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <h3>Delivery Details</h3>
+                    <input type="text" id="name" placeholder="Full Name" required>
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
+                    <textarea id="address" placeholder="Delivery Address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <h3>Payment Method</h3>
+                    <div class="payment-options">
+                        <label>
+                            <input type="radio" name="payment" value="cash" checked>
+                            Cash on Delivery
+                        </label>
+                        <label>
+                            <input type="radio" name="payment" value="card">
+                            Credit/Debit Card
+                        </label>
+                        <label>
+                            <input type="radio" name="payment" value="upi">
+                            UPI
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

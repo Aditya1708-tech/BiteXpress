@@ -1,609 +1,745 @@
-// const menuItems = [
-//     // Main Course
-//     { 
-//       id: 1, 
-//       name: "Burger", 
-//       price: 199, 
-//       image: "images/burger.jpg",
-//       description: "Classic beef burger with fresh vegetables",
-//       category: "main"
-//     },
-//     { 
-//       id: 2, 
-//       name: "Pizza", 
-//       price: 299, 
-//       image: "images/pizza.jpg",
-//       description: "Freshly baked pizza with your choice of toppings",
-//       category: "main"
-//     },
-//     { 
-//       id: 3, 
-//       name: "Pasta", 
-//       price: 249, 
-//       image: "images/pasta.jpg",
-//       description: "Italian pasta with rich tomato sauce",
-//       category: "sides"
-//     },
-//     { 
-//       id: 4, 
-//       name: "French Fries", 
-//       price: 99, 
-//       image: "images/fries.jpg",
-//       description: "Crispy golden fries with seasoning",
-//       category: "sides"
-//     },
-//     { 
-//       id: 5, 
-//       name: "Samosa", 
-//       price: 49, 
-//       image: "images/samosa.jpg",
-//       description: "Crispy pastry filled with spiced potatoes",
-//       category: "snacks"
-//     },
-//     { 
-//       id: 6, 
-//       name: "Pani Puri", 
-//       price: 79, 
-//       image: "images/pani_puri.JPG",
-//       description: "Crispy puris filled with spicy water and chutney",
-//       category: "snacks"
-//     },
-//     { 
-//       id: 7, 
-//       name: "Paneer Tikka", 
-//       price: 199, 
-//       image: "images/paneer.jpg",
-//       description: "Grilled cottage cheese with Indian spices",
-//       category: "main"
-//     },
-//     { 
-//       id: 8, 
-//       name: "Momos", 
-//       price: 129, 
-//       image: "images/momos.jpg",
-//       description: "Steamed dumplings with vegetable filling",
-//       category: "snacks"
-//     },
-//     // Desserts
-//     {
-//       id: 9,
-//       name: "Chocolate Brownie",
-//       price: 149,
-//       image: "images/chocolate_brownie.jpg",
-//       description: "Rich chocolate brownie served with vanilla ice cream",
-//       category: "dessert"
-//     },
-//     {
-//       id: 10,
-//       name: "Rajbhog",
-//       price: 89,
-//       image: "images/Rajbhog.png",
-//       description: "Traditional Indian sweet filled with saffron and dry fruits",
-//       category: "dessert"
-//     },
-//     {
-//       id: 11,
-//       name: "Hazelnut Ice Cream",
-//       image: "images/hazelnut_icecream.jpg",
-//       description: "Creamy hazelnut ice cream with chocolate swirls",
-//       category: "dessert"
-//     },
-//     {
-//       id: 12,
-//       name: "Fresh Pastry",
-//       price: 129,
-//       image: "images/pastry.jpg",
-//       description: "Light and fluffy pastry with fresh cream",
-//       category: "dessert"
-//     }
-// ];
-  
-const menuContainer = document.getElementById("menu");
-const cartList = document.getElementById("cartList");
-const totalSpan = document.getElementById("total");
-const checkoutBtn = document.getElementById("checkoutBtn");
-const modal = document.getElementById("checkoutModal");
-const closeBtn = document.querySelector(".close");
-const checkoutForm = document.getElementById("checkoutForm");
-const modalCartList = document.getElementById("modalCartList");
-const modalTotal = document.getElementById("modalTotal");
-const cartElement = document.querySelector('.cart');
-const cartLink = document.getElementById('cartLink');
-const closeCartBtn = document.querySelector('.close-cart');
-const cartCount = document.getElementById('cartCount');
-  
-// Navigation elements
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
-const navLinks = document.querySelectorAll('.nav-links li');
-  
-// Offer rotation functionality
-const offerCards = document.querySelectorAll('.offer-card');
-const dots = document.querySelectorAll('.dot');
-let currentSlide = 0;
-let slideInterval;
-
-function showSlide(index) {
-  // Hide all slides
-  offerCards.forEach(card => {
-    card.classList.remove('active');
-  });
-  dots.forEach(dot => {
-    dot.classList.remove('active');
-  });
-
-  // Show current slide
-  const startIndex = index * 3;
-  for (let i = 0; i < 3; i++) {
-    if (offerCards[startIndex + i]) {
-      offerCards[startIndex + i].classList.add('active');
-    }
-  }
-  dots[index].classList.add('active');
-}
-
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % (offerCards.length / 3);
-  showSlide(currentSlide);
-}
-
-function startSlideShow() {
-  slideInterval = setInterval(nextSlide, 3000);
-}
-
-function stopSlideShow() {
-  clearInterval(slideInterval);
-}
-
-// Initialize slideshow
-document.addEventListener('DOMContentLoaded', () => {
-  showSlide(0);
-  startSlideShow();
-
-  // Add click handlers for dots
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      currentSlide = index;
-      showSlide(currentSlide);
-    });
-  });
-
-  // Pause on hover
-  const offersContainer = document.querySelector('.offers-container');
-  offersContainer.addEventListener('mouseenter', stopSlideShow);
-  offersContainer.addEventListener('mouseleave', startSlideShow);
+// Wait for DOM content to load
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  initGlobalCart();
+  initNavbarSearch();
+  initContactForm();
+  initMobileMenu();
 });
-  
-// Initialize cart from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-// Initialize cart functionality
-function initializeCart() {
-  console.log('Initializing cart...');
-  
-  // Check for cart actions from other pages
-  const lastCartAction = JSON.parse(localStorage.getItem('lastCartAction') || '{}');
-  if (lastCartAction.type === 'remove' && new Date().getTime() - lastCartAction.timestamp < 3000) {
-    const notification = document.createElement('div');
-    notification.className = 'cart-notification remove-notification';
-    notification.textContent = lastCartAction.message;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-      notification.remove();
-    }, 2000);
-  }
-  // Clear the action after showing
-  localStorage.removeItem('lastCartAction');
-  
-  // Cart visibility functionality
-  if (cartLink) {
-    cartLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      console.log('Cart link clicked');
-      cartElement.style.right = '0';
-    });
-  }
 
-  if (closeCartBtn) {
-    closeCartBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      console.log('Close cart clicked');
-      cartElement.style.right = '-400px';
-    });
-  }
+/* ==========================================
+   1. Theme Management (Light / Dark Mode)
+   ========================================== */
+function initTheme() {
+  const themeToggleBtn = document.getElementById("themeToggle");
+  if (!themeToggleBtn) return;
 
-  // Close cart when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!cartElement.contains(e.target) && !cartLink.contains(e.target)) {
-      cartElement.style.right = '-400px';
-    }
+  // Read saved theme or default to system preference
+  const savedTheme = localStorage.getItem("bx_theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcon(savedTheme);
+
+  themeToggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("bx_theme", newTheme);
+    updateThemeIcon(newTheme);
+    showToast(`Switched to ${newTheme} mode!`, "success");
   });
-
-  // Add to cart functionality
-  const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  console.log('Found add to cart buttons:', addToCartButtons.length);
-  
-  addToCartButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      console.log('Add to cart button clicked');
-      
-      const menuItem = e.target.closest('.menu-item');
-      if (!menuItem) {
-        console.log('No menu item found');
-        return;
-      }
-      
-      const itemName = menuItem.querySelector('h3').textContent;
-      const itemPrice = parseFloat(menuItem.querySelector('.price').textContent.replace('₹', ''));
-      const itemImage = menuItem.querySelector('img').src;
-      
-      console.log('Adding item:', { itemName, itemPrice, itemImage });
-      
-      addToCart({
-        name: itemName,
-        price: itemPrice,
-        image: itemImage,
-        quantity: 1
-      });
-    });
-  });
-
-  // Initial cart update
-  updateCart();
 }
 
-function addToCart(item) {
-  console.log('Adding to cart:', item);
-  const existingItem = cart.find(cartItem => cartItem.name === item.name);
-  
-  if (existingItem) {
-    existingItem.quantity += 1;
+function updateThemeIcon(theme) {
+  const icon = document.querySelector("#themeToggle i");
+  if (!icon) return;
+  if (theme === "dark") {
+    icon.className = "fas fa-sun";
   } else {
-    cart.push(item);
+    icon.className = "fas fa-moon";
   }
-  
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCart();
-  updateCartCount();
-  cartElement.style.right = '0';
 }
 
-function updateCart() {
-  console.log('Updating cart display');
-  if (!cartList || !totalSpan || !cartCount) {
-    console.log('Missing cart elements:', { cartList, totalSpan, cartCount });
-    return;
-  }
+/* ==========================================
+   2. Global Toast Alert System
+   ========================================== */
+function showToast(message, type = "success") {
+  // Remove existing toasts first to prevent piling
+  const existingToasts = document.querySelectorAll(".bx-toast");
+  existingToasts.forEach(t => t.remove());
+
+  const toast = document.createElement("div");
+  toast.className = `bx-toast toast-${type}`;
   
-  cartList.innerHTML = '';
+  let iconClass = "fas fa-check-circle";
+  if (type === "remove") iconClass = "fas fa-trash-alt";
+  else if (type === "info") iconClass = "fas fa-info-circle";
+  
+  toast.innerHTML = `
+    <i class="${iconClass}"></i>
+    <span>${message}</span>
+  `;
+  document.body.appendChild(toast);
+
+  // Animate out and remove after 2.5s
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(20px) scale(0.9)";
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+window.showToast = showToast; // Export globally
+
+/* ==========================================
+   3. Global Cart & Checkout Management
+   ========================================== */
+let cart = [];
+let appliedCoupon = null;
+
+function initGlobalCart() {
+  // Sync state from localStorage
+  cart = JSON.parse(localStorage.getItem("bx_cart")) || [];
+
+  const cartLink = document.getElementById("cartLink");
+  const cartOverlay = document.getElementById("cartOverlay");
+  const cartElement = document.getElementById("cartDrawer");
+  const closeCartBtn = document.getElementById("closeCart");
+  
+  // Elements exist?
+  if (cartLink && cartOverlay && cartElement && closeCartBtn) {
+    cartLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      openCartDrawer();
+    });
+
+    closeCartBtn.addEventListener("click", () => {
+      closeCartDrawer();
+    });
+
+    cartOverlay.addEventListener("click", () => {
+      closeCartDrawer();
+    });
+  }
+
+  // Bind Checkout Buttons
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const checkoutModal = document.getElementById("checkoutModal");
+  const closeModalBtn = document.querySelector("#checkoutModal .close");
+  const checkoutForm = document.getElementById("checkoutForm");
+
+  if (checkoutBtn && checkoutModal && closeModalBtn) {
+    checkoutBtn.addEventListener("click", () => {
+      if (cart.length === 0) return;
+      openCheckoutModal();
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      closeCheckoutModal();
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === checkoutModal) {
+        closeCheckoutModal();
+      }
+    });
+  }
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", handleOrderPlacement);
+  }
+
+  // Bind Coupon UI
+  const applyCouponBtn = document.getElementById("applyCouponBtn");
+  if (applyCouponBtn) {
+    applyCouponBtn.addEventListener("click", handleApplyCoupon);
+  }
+
+  // Initial cart display update
+  updateCartUI();
+}
+
+function openCartDrawer() {
+  const cartOverlay = document.getElementById("cartOverlay");
+  const cartElement = document.getElementById("cartDrawer");
+  if (cartOverlay && cartElement) {
+    cartOverlay.classList.add("active");
+    cartElement.classList.add("active");
+  }
+}
+
+function closeCartDrawer() {
+  const cartOverlay = document.getElementById("cartOverlay");
+  const cartElement = document.getElementById("cartDrawer");
+  if (cartOverlay && cartElement) {
+    cartOverlay.classList.remove("active");
+    cartElement.classList.remove("active");
+  }
+}
+
+function updateCartUI() {
+  const cartList = document.getElementById("cartList");
+  const cartCount = document.getElementById("cartCount");
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  
+  if (!cartList) return;
+
+  cartList.innerHTML = "";
   let subtotal = 0;
-  let itemCount = 0;
+  let totalItems = 0;
 
-  cart.forEach(item => {
-    console.log('Processing cart item:', item);
-    const li = document.createElement('li');
-    li.className = 'cart-item';
-    const itemTotal = item.price * item.quantity;
-    subtotal += itemTotal;
-    itemCount += item.quantity;
+  cart.forEach((item) => {
+    subtotal += item.price * item.quantity;
+    totalItems += item.quantity;
 
+    const li = document.createElement("li");
+    li.className = "cart-item";
     li.innerHTML = `
-      <div class="cart-item-image">
-        <img src="${item.image}" alt="${item.name}">
-      </div>
+      <img src="${item.image}" alt="${item.name}" onerror="this.src='images/pizza.jpg'">
       <div class="cart-item-details">
         <h4>${item.name}</h4>
-        <p>₹${item.price.toFixed(2)} x ${item.quantity}</p>
-        <p class="cart-item-price">Total: ₹${itemTotal.toFixed(2)}</p>
+        <p>₹${item.price} • ${item.restaurant}</p>
       </div>
-      <button class="remove-item" onclick="removeFromCart('${item.name}', '${item.restaurant}')">Remove</button>
+      <div class="cart-item-actions">
+        <div class="item-qty-selector">
+          <button onclick="changeCartItemQuantity('${item.id}', -1)">-</button>
+          <span>${item.quantity}</span>
+          <button onclick="changeCartItemQuantity('${item.id}', 1)">+</button>
+        </div>
+        <button class="remove-item" onclick="removeCartItem('${item.id}')">Remove</button>
+      </div>
     `;
     cartList.appendChild(li);
   });
 
-  // Calculate GST and delivery charges
+  // Calculate pricing breakdown
   const gst = subtotal * 0.05; // 5% GST
-  const deliveryCharges = 20; // ₹20 delivery charges
-  const total = subtotal + gst + deliveryCharges;
+  let deliveryFee = subtotal > 0 ? 20 : 0; // ₹20 flat delivery charge
 
-  // Add charges breakdown
-  const chargesDiv = document.createElement('div');
-  chargesDiv.className = 'cart-charges';
-  chargesDiv.innerHTML = `
-    <div class="charge-item">
-      <span>Subtotal</span>
-      <span>₹${subtotal.toFixed(2)}</span>
-    </div>
-    <div class="charge-item">
-      <span>GST (5%)</span>
-      <span>₹${gst.toFixed(2)}</span>
-    </div>
-    <div class="charge-item">
-      <span>Delivery Charges</span>
-      <span>₹${deliveryCharges.toFixed(2)}</span>
-    </div>
-    <div class="charge-item total">
-      <span>Total</span>
-      <span>₹${total.toFixed(2)}</span>
-    </div>
-  `;
-  cartList.appendChild(chargesDiv);
-
-  totalSpan.textContent = `Total: ₹${total.toFixed(2)}`;
-  cartCount.textContent = itemCount;
-  cartCount.style.display = itemCount > 0 ? 'inline-block' : 'none';
-  checkoutBtn.disabled = cart.length === 0;
-}
-
-function removeFromCart(itemName, restaurant) {
-  console.log('Removing item:', itemName, 'from restaurant:', restaurant);
-  cart = cart.filter(item => !(item.name === itemName && item.restaurant === restaurant));
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCart();
-  updateCartCount();
-  
-  // Show notification
-  const notification = document.createElement('div');
-  notification.className = 'cart-notification remove-notification';
-  notification.textContent = 'Item removed from cart';
-  document.body.appendChild(notification);
-  
-  // Remove notification after 2 seconds
-  setTimeout(() => {
-    notification.remove();
-  }, 2000);
-
-  // Store the removal event in localStorage for other pages
-  localStorage.setItem('lastCartAction', JSON.stringify({
-    type: 'remove',
-    message: 'Item removed from cart',
-    timestamp: new Date().getTime()
-  }));
-}
-
-function updateCartCount() {
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-  cartCount.textContent = totalItems;
-  cartCount.style.display = totalItems > 0 ? 'inline-block' : 'none';
-}
-
-// Initialize cart when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeCart);
-  
-// Mobile menu functionality
-burger.addEventListener('click', () => {
-  // Toggle Nav
-  nav.classList.toggle('active');
-  
-  // Animate Links
-  navLinks.forEach((link, index) => {
-    if (link.style.animation) {
-      link.style.animation = '';
+  let discount = 0;
+  if (appliedCoupon) {
+    if (subtotal < appliedCoupon.minOrder) {
+      // Order subtotal fell below minOrder limit
+      appliedCoupon = null;
+      showToast("Coupon removed! Subtotal is too low.", "remove");
+      updateCouponDisplay();
     } else {
-      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+      if (appliedCoupon.discountType === "percentage") {
+        discount = Math.min((subtotal * appliedCoupon.value) / 100, appliedCoupon.maxDiscount);
+      } else if (appliedCoupon.discountType === "free_delivery") {
+        discount = deliveryFee;
+      } else if (appliedCoupon.discountType === "flat") {
+        discount = Math.min(appliedCoupon.value, subtotal);
+      }
     }
-  });
+  }
+
+  const grandTotal = Math.max(0, subtotal + gst + deliveryFee - discount);
+
+  // Update DOM values
+  if (cartCount) {
+    cartCount.textContent = totalItems;
+    cartCount.style.display = totalItems > 0 ? "inline-block" : "none";
+  }
+
+  const subtotalVal = document.getElementById("subtotalVal");
+  const gstVal = document.getElementById("gstVal");
+  const deliveryVal = document.getElementById("deliveryVal");
+  const discountRow = document.getElementById("discountRow");
+  const discountVal = document.getElementById("discountVal");
+  const grandTotalVal = document.getElementById("grandTotalVal");
+
+  if (subtotalVal) subtotalVal.textContent = `₹${subtotal.toFixed(2)}`;
+  if (gstVal) gstVal.textContent = `₹${gst.toFixed(2)}`;
+  if (deliveryVal) deliveryVal.textContent = `₹${deliveryFee.toFixed(2)}`;
   
-  // Burger Animation
-  burger.classList.toggle('active');
-});
+  if (discountRow && discountVal) {
+    if (discount > 0) {
+      discountRow.style.display = "flex";
+      discountVal.textContent = `-₹${discount.toFixed(2)}`;
+    } else {
+      discountRow.style.display = "none";
+    }
+  }
   
-// Close mobile menu when clicking a link
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('active');
-    burger.classList.remove('active');
-    navLinks.forEach(link => {
-      link.style.animation = '';
+  if (grandTotalVal) grandTotalVal.textContent = `₹${grandTotal.toFixed(2)}`;
+  if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+
+  // Persist state
+  localStorage.setItem("bx_cart", JSON.stringify(cart));
+}
+
+// Add item to cart (accessible from storefront)
+function addToCart(itemId, itemName, itemPrice, itemImage, restaurantName) {
+  const existing = cart.find(item => item.id === itemId);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      id: itemId,
+      name: itemName,
+      price: parseFloat(itemPrice),
+      image: itemImage,
+      restaurant: restaurantName,
+      quantity: 1
     });
-  });
-});
+  }
+  updateCartUI();
+  updateStoreQuantitySelector(itemId);
+  showToast(`Added ${itemName} to Cart`, "success");
+  openCartDrawer();
+}
+window.addToCart = addToCart;
+
+// Change item quantity in cart drawer
+function changeCartItemQuantity(itemId, amount) {
+  const item = cart.find(item => item.id === itemId);
+  if (!item) return;
+
+  item.quantity += amount;
+  if (item.quantity <= 0) {
+    removeCartItem(itemId);
+    return;
+  }
   
-function renderModalCart() {
-  modalCartList.innerHTML = "";
-  let total = 0;
-  cart.forEach(item => {
+  updateCartUI();
+  updateStoreQuantitySelector(itemId);
+}
+window.changeCartItemQuantity = changeCartItemQuantity;
+
+// Remove item from cart
+function removeCartItem(itemId) {
+  const item = cart.find(item => item.id === itemId);
+  const itemName = item ? item.name : "Item";
+  cart = cart.filter(item => item.id !== itemId);
+  
+  updateCartUI();
+  updateStoreQuantitySelector(itemId);
+  showToast(`${itemName} removed from Cart`, "remove");
+}
+window.removeCartItem = removeCartItem;
+
+// Sync item quantity selectors on restaurant menu page with active cart counts
+function updateStoreQuantitySelector(itemId) {
+  const btnContainer = document.querySelector(`.add-btn-container[data-id="${itemId}"]`);
+  if (!btnContainer) return;
+
+  const cartItem = cart.find(item => item.id === itemId);
+  if (cartItem && cartItem.quantity > 0) {
+    btnContainer.innerHTML = `
+      <div class="item-qty-selector">
+        <button onclick="event.stopPropagation(); changeCartItemQuantity('${itemId}', -1)">-</button>
+        <span>${cartItem.quantity}</span>
+        <button onclick="event.stopPropagation(); changeCartItemQuantity('${itemId}', 1)">+</button>
+      </div>
+    `;
+  } else {
+    // Re-render add button
+    const name = btnContainer.dataset.name;
+    const price = btnContainer.dataset.price;
+    const img = btnContainer.dataset.img;
+    const rest = btnContainer.dataset.rest;
+    btnContainer.innerHTML = `
+      <button class="add-btn" onclick="addToCart('${itemId}', '${name}', ${price}, '${img}', '${rest}')">ADD</button>
+    `;
+  }
+}
+window.updateStoreQuantitySelector = updateStoreQuantitySelector;
+
+/* ==========================================
+   4. Coupon Actions
+   ========================================== */
+function handleApplyCoupon() {
+  const couponInput = document.getElementById("couponInput");
+  if (!couponInput) return;
+
+  const code = couponInput.value.trim().toUpperCase();
+  if (!code) {
+    showToast("Please enter a coupon code", "info");
+    return;
+  }
+
+  // Calculate current subtotal
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  if (subtotal === 0) {
+    showToast("Your cart is empty", "info");
+    return;
+  }
+
+  const coupons = window.BiteXpress.getCoupons();
+  const matched = coupons.find(c => c.code === code);
+
+  if (!matched) {
+    showToast("Invalid Coupon Code", "remove");
+    return;
+  }
+
+  if (subtotal < matched.minOrder) {
+    showToast(`Minimum order required is ₹${matched.minOrder}`, "info");
+    return;
+  }
+
+  appliedCoupon = matched;
+  couponInput.value = "";
+  updateCartUI();
+  updateCouponDisplay();
+  showToast(`Coupon ${code} applied successfully!`, "success");
+}
+
+function removeCoupon() {
+  appliedCoupon = null;
+  updateCartUI();
+  updateCouponDisplay();
+  showToast("Coupon removed", "remove");
+}
+window.removeCoupon = removeCoupon;
+
+function updateCouponDisplay() {
+  const couponArea = document.getElementById("couponArea");
+  if (!couponArea) return;
+
+  const activeDisplay = couponArea.querySelector(".active-coupon-display");
+  if (activeDisplay) activeDisplay.remove();
+
+  if (appliedCoupon) {
     const div = document.createElement("div");
-    div.className = "modal-cart-item";
+    div.className = "active-coupon-display";
     div.innerHTML = `
+      <span><i class="fas fa-tag"></i> Code <strong>${appliedCoupon.code}</strong> applied</span>
+      <button onclick="removeCoupon()">&times; Remove</button>
+    `;
+    couponArea.appendChild(div);
+  }
+}
+
+/* ==========================================
+   5. Checkout Modal & Order Placement
+   ========================================== */
+function openCheckoutModal() {
+  const modal = document.getElementById("checkoutModal");
+  const modalCartList = document.getElementById("modalCartList");
+  const modalTotal = document.getElementById("modalTotal");
+  
+  if (!modal || !modalCartList || !modalTotal) return;
+
+  // Clear & populate
+  modalCartList.innerHTML = "";
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += item.price * item.quantity;
+    const row = document.createElement("div");
+    row.className = "modal-cart-item";
+    row.innerHTML = `
       <span>${item.name} x${item.quantity}</span>
       <span>₹${(item.price * item.quantity).toFixed(2)}</span>
     `;
-    modalCartList.appendChild(div);
-    total += item.price * item.quantity;
+    modalCartList.appendChild(row);
   });
-  modalTotal.textContent = `Total: ₹${total.toFixed(2)}`;
-}
-  
-function openCheckoutModal() {
-  if (cart.length === 0) return;
-  renderModalCart();
-  modal.style.display = "block";
-}
-  
-function closeCheckoutModal() {
-  modal.style.display = "none";
-}
-  
-function handleCheckout(event) {
-  event.preventDefault();
-  
-  // Get form values
-  const fullName = document.getElementById("fullName").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const pincode = document.getElementById("pincode").value;
-  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-  
-  // Generate order ID
-  const orderId = "ORD" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0");
-  
-  // Calculate total
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  
-  // Create order summary
-  let orderSummary = "Order Details:\n\n";
-  cart.forEach(item => {
-    orderSummary += `${item.name} x${item.quantity} - ₹${(item.price * item.quantity).toFixed(2)}\n`;
-  });
-  
-  // Show order confirmation
-  alert(`
-    Order placed successfully!
-    
-    Order ID: ${orderId}
-    Name: ${fullName}
-    Phone: ${phone}
-    Address: ${address}
-    Pincode: ${pincode}
-    Payment Method: ${paymentMethod}
-    
-    ${orderSummary}
-    Total Amount: ₹${total.toFixed(2)}
-    
-    Thank you for your purchase!
-  `);
-  
-  // Clear the cart and form
-  cart = [];
-  checkoutForm.reset();
-  renderCart();
-  closeCheckoutModal();
-  cartElement.style.right = '-400px';
-}
-  
-// // Add category filter buttons
-// function createCategoryFilters() {
-//     const categories = ["all", "main", "snacks", "sides", "dessert"];
-//     const filterContainer = document.createElement("div");
-//     filterContainer.className = "category-filters";
-    
-//     categories.forEach(category => {
-//         const button = document.createElement("button");
-//         button.className = "filter-btn" + (category === "all" ? " active" : "");
-//         button.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-//         button.onclick = () => filterMenu(category);
-//         filterContainer.appendChild(button);
-//     });
-    
-//     // Insert filters before the menu
-//     const menuContainer = document.getElementById("menu");
-//     menuContainer.parentNode.insertBefore(filterContainer, menuContainer);
-// }
-  
-// // Filter menu items by category
-// function filterMenu(category) {
-//     // Update active button
-//     document.querySelectorAll('.filter-btn').forEach(btn => {
-//         btn.classList.remove('active');
-//     });
-//     event.target.classList.add('active');
-    
-//     // Filter and render items
-//     menuContainer.innerHTML = "";
-//     const filteredItems = category === "all" 
-//         ? menuItems 
-//         : menuItems.filter(item => item.category === category);
-    
-//     filteredItems.forEach(item => {
-//         const card = document.createElement("div");
-//         card.className = "card";
-//         card.innerHTML = `
-//             <div class="card-image">
-//                 <img src="${item.image}" alt="${item.name}" />
-//             </div>
-//             <div class="card-content">
-//                 <h3>${item.name}</h3>
-//                 <p class="description">${item.description}</p>
-//                 <p class="price">₹${item.price}</p>
-//                 <button onclick='addToCart(${JSON.stringify(item)})'>Add to Cart</button>
-//             </div>
-//         `;
-//         menuContainer.appendChild(card);
-//     });
-// }
-  
-// // Initialize menu with filters
-// function initializeMenu() {
-//     createCategoryFilters();
-//     // Directly render all items without waiting for click
-//     menuContainer.innerHTML = "";
-//     menuItems.forEach(item => {
-//         const card = document.createElement("div");
-//         card.className = "card";
-//         card.innerHTML = `
-//             <div class="card-image">
-//                 <img src="${item.image}" alt="${item.name}" />
-//             </div>
-//             <div class="card-content">
-//                 <h3>${item.name}</h3>
-//                 <p class="description">${item.description}</p>
-//                 <p class="price">₹${item.price}</p>
-//                 <button onclick='addToCart(${JSON.stringify(item)})'>Add to Cart</button>
-//             </div>
-//         `;
-//         menuContainer.appendChild(card);
-//     });
-// }
-  
-// Event Listeners
-checkoutBtn.addEventListener('click', openCheckoutModal);
-closeBtn.addEventListener('click', closeCheckoutModal);
-checkoutForm.addEventListener('submit', handleCheckout);
-  
-// Close modal when clicking outside
-window.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    closeCheckoutModal();
-  }
-});
-  
-// Make sure the menu is initialized when the DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeMenu);
-  
-// Contact Form Functionality
-const contactModal = document.getElementById('contactModal');
-const contactLink = document.getElementById('contactLink');
-const closeContactBtn = document.querySelector('.close-contact');
-const contactForm = document.getElementById('contactForm');
 
-// Open contact modal
-contactLink.addEventListener('click', (e) => {
+  // Calculate final pricing
+  const gst = subtotal * 0.05;
+  const delivery = 20;
+  let discount = 0;
+  if (appliedCoupon) {
+    if (appliedCoupon.discountType === "percentage") {
+      discount = Math.min((subtotal * appliedCoupon.value) / 100, appliedCoupon.maxDiscount);
+    } else if (appliedCoupon.discountType === "free_delivery") {
+      discount = delivery;
+    } else if (appliedCoupon.discountType === "flat") {
+      discount = Math.min(appliedCoupon.value, subtotal);
+    }
+  }
+
+  const finalTotal = Math.max(0, subtotal + gst + delivery - discount);
+
+  let breakdownHTML = `
+    <div class="modal-cart-item" style="color: var(--text-secondary); margin-top: 8px;">
+      <span>Subtotal</span>
+      <span>₹${subtotal.toFixed(2)}</span>
+    </div>
+    <div class="modal-cart-item" style="color: var(--text-secondary);">
+      <span>GST (5%)</span>
+      <span>₹${gst.toFixed(2)}</span>
+    </div>
+    <div class="modal-cart-item" style="color: var(--text-secondary);">
+      <span>Delivery Fee</span>
+      <span>₹${delivery.toFixed(2)}</span>
+    </div>
+  `;
+
+  if (discount > 0) {
+    breakdownHTML += `
+      <div class="modal-cart-item" style="color: var(--accent);">
+        <span>Discount (${appliedCoupon.code})</span>
+        <span>-₹${discount.toFixed(2)}</span>
+      </div>
+    `;
+  }
+
+  breakdownHTML += `
+    <div class="modal-total">
+      <span>Grand Total</span>
+      <span>₹${finalTotal.toFixed(2)}</span>
+    </div>
+  `;
+
+  modalTotal.innerHTML = breakdownHTML;
+
+  // If user is logged in, auto-fill address
+  const activeUser = window.BiteXpress.getActiveUser();
+  if (activeUser) {
+    const fullNameInput = document.getElementById("fullName");
+    const phoneInput = document.getElementById("phone");
+    const addressInput = document.getElementById("address");
+    const pincodeInput = document.getElementById("pincode");
+
+    if (fullNameInput) fullNameInput.value = activeUser.name || "";
+    if (phoneInput) phoneInput.value = activeUser.phone || "";
+    if (addressInput) addressInput.value = activeUser.address || "";
+    if (pincodeInput) pincodeInput.value = activeUser.pincode || "";
+  }
+
+  modal.classList.add("active");
+}
+
+function closeCheckoutModal() {
+  const modal = document.getElementById("checkoutModal");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+}
+
+function handleOrderPlacement(e) {
+  e.preventDefault();
+
+  const fullName = document.getElementById("fullName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const pincode = document.getElementById("pincode").value.trim();
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+  if (!fullName || !phone || !address || !pincode) {
+    showToast("Please fill in all fields", "info");
+    return;
+  }
+
+  // Validate pincode (6 digits)
+  if (!/^\d{6}$/.test(pincode)) {
+    showToast("Please enter a valid 6-digit pincode", "info");
+    return;
+  }
+
+  // Calculate pricing
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const gst = subtotal * 0.05;
+  const delivery = 20;
+  let discount = 0;
+  if (appliedCoupon) {
+    if (appliedCoupon.discountType === "percentage") {
+      discount = Math.min((subtotal * appliedCoupon.value) / 100, appliedCoupon.maxDiscount);
+    } else if (appliedCoupon.discountType === "free_delivery") {
+      discount = delivery;
+    } else if (appliedCoupon.discountType === "flat") {
+      discount = Math.min(appliedCoupon.value, subtotal);
+    }
+  }
+  const finalTotal = Math.max(0, subtotal + gst + delivery - discount);
+
+  // Generate ORD ID
+  const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
+
+  const orderData = {
+    orderId,
+    name: fullName,
+    phone,
+    address,
+    pincode,
+    paymentMethod,
+    date: new Date().toISOString(),
+    items: [...cart],
+    subtotal,
+    gst,
+    deliveryCharges: delivery,
+    discount,
+    total: finalTotal,
+    status: "Pending" // Initial state for Admin dashboard workflow
+  };
+
+  // Save order to history database
+  const orders = window.BiteXpress.getOrders();
+  orders.unshift(orderData);
+  window.BiteXpress.setOrders(orders);
+
+  // Display Premium Alert Success popup
+  alert(`🎉 Order Placed Successfully!\n\nOrder ID: ${orderId}\nEstimated Delivery: 35 mins\nTotal Amount: ₹${finalTotal.toFixed(2)}\n\nThank you for ordering with BiteXpress!`);
+
+  // Reset cart
+  cart = [];
+  appliedCoupon = null;
+  updateCartUI();
+  updateCouponDisplay();
+  
+  // Re-sync menu qty selectors if on restaurant details page
+  const qtySelectors = document.querySelectorAll(".add-btn-container");
+  qtySelectors.forEach(container => {
+    const itemId = container.dataset.id;
+    updateStoreQuantitySelector(itemId);
+  });
+
+  closeCheckoutModal();
+  closeCartDrawer();
+  document.getElementById("checkoutForm").reset();
+}
+
+/* ==========================================
+   6. Dynamic Search & Dropdown Auto-complete
+   ========================================== */
+function initNavbarSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const resultsDropdown = document.getElementById("searchResultsDropdown");
+
+  if (!searchInput || !resultsDropdown) return;
+
+  searchInput.addEventListener("input", (e) => {
+    const val = e.target.value.trim().toLowerCase();
+    if (!val) {
+      resultsDropdown.innerHTML = "";
+      resultsDropdown.classList.remove("active");
+      return;
+    }
+
+    const restaurants = window.BiteXpress.getRestaurants();
+    let matches = [];
+
+    restaurants.forEach((rest) => {
+      // Match restaurant name
+      if (rest.name.toLowerCase().includes(val) || rest.cuisines.some(c => c.toLowerCase().includes(val))) {
+        matches.push({
+          type: "restaurant",
+          name: rest.name,
+          subtitle: rest.cuisines.join(", "),
+          image: rest.logo,
+          url: `restaurant.html?id=${rest.id}`
+        });
+      }
+
+      // Match menu item names
+      rest.menu.forEach((dish) => {
+        if (dish.name.toLowerCase().includes(val) || (dish.description && dish.description.toLowerCase().includes(val))) {
+          matches.push({
+            type: "dish",
+            name: dish.name,
+            subtitle: `In ${rest.name} • ₹${dish.price}`,
+            image: dish.image,
+            url: `restaurant.html?id=${rest.id}&dish=${dish.id}`
+          });
+        }
+      });
+    });
+
+    // Remove duplicates by name
+    const uniqueMatches = [];
+    const seen = new Set();
+    matches.forEach(item => {
+      const key = `${item.type}-${item.name}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueMatches.push(item);
+      }
+    });
+
+    renderSearchDropdown(uniqueMatches.slice(0, 7));
+  });
+
+  // Hide dropdown on clicking outside
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !resultsDropdown.contains(e.target)) {
+      resultsDropdown.classList.remove("active");
+    }
+  });
+
+  searchInput.addEventListener("focus", () => {
+    if (searchInput.value.trim()) {
+      resultsDropdown.classList.add("active");
+    }
+  });
+}
+
+function renderSearchDropdown(items) {
+  const resultsDropdown = document.getElementById("searchResultsDropdown");
+  if (!resultsDropdown) return;
+
+  resultsDropdown.innerHTML = "";
+  if (items.length === 0) {
+    resultsDropdown.innerHTML = `<div class="search-item-row" style="cursor: default; justify-content: center; color: var(--text-tertiary);">No matches found</div>`;
+    resultsDropdown.classList.add("active");
+    return;
+  }
+
+  items.forEach((item) => {
+    const row = document.createElement("div");
+    row.className = "search-item-row";
+    row.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" onerror="this.src='images/pizza.jpg'">
+      <div class="info">
+        <h4>${item.name}</h4>
+        <p><i class="${item.type === 'restaurant' ? 'fas fa-store' : 'fas fa-utensils'}"></i> ${item.subtitle}</p>
+      </div>
+    `;
+    row.addEventListener("click", () => {
+      window.location.href = item.url;
+    });
+    resultsDropdown.appendChild(row);
+  });
+
+  resultsDropdown.classList.add("active");
+}
+
+/* ==========================================
+   7. Mobile Navigation burger Toggle
+   ========================================== */
+function initMobileMenu() {
+  const burger = document.querySelector(".burger");
+  const nav = document.querySelector(".nav-links");
+  const navLinks = document.querySelectorAll(".nav-links li");
+
+  if (!burger || !nav) return;
+
+  burger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    burger.classList.toggle("active");
+  });
+
+  // Close when clicking individual links
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      burger.classList.remove("active");
+    });
+  });
+}
+
+/* ==========================================
+   8. Contact Us Form Modals
+   ========================================== */
+function initContactForm() {
+  const contactLink = document.getElementById("contactLink");
+  const contactModal = document.getElementById("contactModal");
+  const closeContactBtn = document.querySelector("#contactModal .close-contact");
+  const contactForm = document.getElementById("contactForm");
+
+  if (!contactLink || !contactModal || !closeContactBtn) return;
+
+  contactLink.addEventListener("click", (e) => {
     e.preventDefault();
     contactModal.style.display = "block";
-});
+    contactModal.classList.add("active");
+  });
 
-// Close contact modal
-closeContactBtn.addEventListener('click', () => {
+  closeContactBtn.addEventListener("click", () => {
     contactModal.style.display = "none";
-});
+    contactModal.classList.remove("active");
+  });
 
-// Close modal when clicking outside
-window.addEventListener('click', (event) => {
-    if (event.target === contactModal) {
-        contactModal.style.display = "none";
+  window.addEventListener("click", (e) => {
+    if (e.target === contactModal) {
+      contactModal.style.display = "none";
+      contactModal.classList.remove("active");
     }
-});
+  });
 
-// Handle contact form submission
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const subject = document.getElementById('contactSubject').value;
-    const message = document.getElementById('contactMessage').value;
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const subject = document.getElementById("contactSubject").value.trim();
+      const message = document.getElementById("contactMessage").value.trim();
 
-    // Here you would typically send the data to your backend
-    console.log('Contact Form Submission:', { name, email, subject, message });
-    
-    // Show success message
-    alert('Thank you for your message! We will get back to you soon.');
-    
-    // Reset form and close modal
-    contactForm.reset();
-    contactModal.style.display = "none";
-});
-  
+      console.log("Contact submission:", { name, email, subject, message });
+      alert(`Message Sent!\n\nThank you ${name}, we have received your request regarding "${subject}". We will reply back to ${email} within 24 hours.`);
+
+      contactForm.reset();
+      contactModal.style.display = "none";
+      contactModal.classList.remove("active");
+    });
+  }
+}

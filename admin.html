@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiteXpress - Admin Management Console</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BiteXpress Logo" onclick="window.location.href='index.html'">
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html#restaurantsSection"><i class="fas fa-utensils"></i> View Stores</a></li>
+      <li><a href="account.html"><i class="fas fa-user"></i> Account</a></li>
+      <li>
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Admin Panel Split Layout -->
+  <div class="admin-layout">
+    <!-- Sidebar navigation -->
+    <aside class="admin-sidebar">
+      <div>
+        <h3 style="margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; color: var(--text-tertiary);">Control Center</h3>
+        <ul class="admin-menu-list">
+          <li class="admin-menu-item active" data-tab="analytics"><i class="fas fa-chart-pie"></i> Analytics</li>
+          <li class="admin-menu-item" data-tab="orders"><i class="fas fa-shopping-bag"></i> Active Orders</li>
+          <li class="admin-menu-item" data-tab="restaurants"><i class="fas fa-store"></i> Manage Kitchens</li>
+          <li class="admin-menu-item" data-tab="products"><i class="fas fa-utensils"></i> Manage Menu</li>
+        </ul>
+      </div>
+      
+      <div style="margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: center;">
+        <p style="font-size: 0.75rem; color: var(--text-tertiary);">BiteXpress Admin Panel v2.0</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main-area">
+      
+      <!-- TAB 1: ANALYTICS PANEL -->
+      <section id="analyticsPanel" class="admin-panel-section active">
+        <h2 style="margin-bottom: 2rem;"><i class="fas fa-chart-bar" style="color:var(--primary)"></i> Business Performance Analytics</h2>
+        
+        <!-- Summary Cards Grid -->
+        <div class="admin-stats-grid">
+          <div class="stat-card glass-card">
+            <div class="stat-icon sales"><i class="fas fa-rupee-sign"></i></div>
+            <div class="stat-info">
+              <h3>Total Sales</h3>
+              <div class="num" id="statRevenue">₹0.00</div>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon orders"><i class="fas fa-shopping-basket"></i></div>
+            <div class="stat-info">
+              <h3>Total Orders</h3>
+              <div class="num" id="statOrders">0</div>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon users"><i class="fas fa-users"></i></div>
+            <div class="stat-info">
+              <h3>Active Users</h3>
+              <div class="num" id="statUsers">1,289</div>
+            </div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon restaurants"><i class="fas fa-store-alt"></i></div>
+            <div class="stat-info">
+              <h3>Kitchen Partners</h3>
+              <div class="num" id="statStores">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="admin-charts-grid">
+          <div class="chart-card glass-card">
+            <h3>Weekly Orders Volume</h3>
+            <!-- Custom SVG Bar Chart -->
+            <div class="svg-chart-container">
+              <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+                <g fill="var(--text-tertiary)" font-size="10" text-anchor="middle">
+                  <!-- Axes lines -->
+                  <line x1="50" y1="200" x2="550" y2="200" stroke="var(--border-color)" stroke-width="2" />
+                  <line x1="50" y1="20" x2="50" y2="200" stroke="var(--border-color)" stroke-width="2" />
+                  
+                  <!-- Gridlines -->
+                  <line x1="50" y1="150" x2="550" y2="150" stroke="var(--border-color)" stroke-dasharray="4,4" />
+                  <line x1="50" y1="100" x2="550" y2="100" stroke="var(--border-color)" stroke-dasharray="4,4" />
+                  <line x1="50" y1="50" x2="550" y2="50" stroke="var(--border-color)" stroke-dasharray="4,4" />
+
+                  <!-- Y-Axis labels -->
+                  <text x="35" y="195" text-anchor="end">0</text>
+                  <text x="35" y="145" text-anchor="end">25</text>
+                  <text x="35" y="95" text-anchor="end">50</text>
+                  <text x="35" y="45" text-anchor="end">75</text>
+
+                  <!-- Bars (Monday to Sunday) -->
+                  <!-- Mon -->
+                  <rect class="chart-bar-rect" x="90" y="80" width="35" height="120" />
+                  <text x="108" y="215">Mon</text>
+                  <!-- Tue -->
+                  <rect class="chart-bar-rect" x="155" y="60" width="35" height="140" />
+                  <text x="173" y="215">Tue</text>
+                  <!-- Wed -->
+                  <rect class="chart-bar-rect" x="220" y="100" width="35" height="100" />
+                  <text x="238" y="215">Wed</text>
+                  <!-- Thu -->
+                  <rect class="chart-bar-rect" x="285" y="70" width="35" height="130" />
+                  <text x="303" y="215">Thu</text>
+                  <!-- Fri -->
+                  <rect class="chart-bar-rect" x="350" y="40" width="35" height="160" />
+                  <text x="368" y="215">Fri</text>
+                  <!-- Sat -->
+                  <rect class="chart-bar-rect" x="415" y="20" width="35" height="180" />
+                  <text x="433" y="215">Sat</text>
+                  <!-- Sun -->
+                  <rect class="chart-bar-rect" x="480" y="30" width="35" height="170" />
+                  <text x="498" y="215">Sun</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="chart-card glass-card" style="display: flex; flex-direction: column;">
+            <h3>Categories Performance</h3>
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap: 1.25rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; font-weight:700;">
+                  <span>Pizzas</span>
+                  <span>45%</span>
+                </div>
+                <div style="height:8px; background:var(--bg-tertiary); border-radius:4px; overflow:hidden;">
+                  <div style="height:100%; width:45%; background:var(--primary)"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; font-weight:700;">
+                  <span>Burgers & Sides</span>
+                  <span>25%</span>
+                </div>
+                <div style="height:8px; background:var(--bg-tertiary); border-radius:4px; overflow:hidden;">
+                  <div style="height:100%; width:25%; background:var(--secondary)"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; font-weight:700;">
+                  <span>Indian Meals & Biryani</span>
+                  <span>20%</span>
+                </div>
+                <div style="height:8px; background:var(--bg-tertiary); border-radius:4px; overflow:hidden;">
+                  <div style="height:100%; width:20%; background:var(--accent)"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:0.85rem; font-weight:700;">
+                  <span>Momos & Dumplings</span>
+                  <span>10%</span>
+                </div>
+                <div style="height:8px; background:var(--bg-tertiary); border-radius:4px; overflow:hidden;">
+                  <div style="height:100%; width:10%; background:#6c5ce7"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: ORDERS MANAGEMENT PANEL -->
+      <section id="ordersPanel" class="admin-panel-section">
+        <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-shopping-basket" style="color:var(--primary)"></i> Active Orders Pipeline</h2>
+        
+        <div class="glass-card" style="padding: 1.5rem; overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Recipient</th>
+                <th>Menu Items</th>
+                <th>Price (₹)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: RESTAURANTS PANEL -->
+      <section id="restaurantsPanel" class="admin-panel-section">
+        <div class="section-actions">
+          <h2><i class="fas fa-store-alt" style="color:var(--primary)"></i> Kitchen Partners List</h2>
+          <button class="search-btn" id="openAddRestModal"><i class="fas fa-plus"></i> Add Restaurant</button>
+        </div>
+
+        <div class="glass-card" style="padding: 1.5rem; overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Restaurant Name</th>
+                <th>Cuisines</th>
+                <th>Distance/Time</th>
+                <th>Rating</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="restaurantsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 4: PRODUCTS MENU PANEL -->
+      <section id="productsPanel" class="admin-panel-section">
+        <div class="section-actions">
+          <h2><i class="fas fa-hamburger" style="color:var(--primary)"></i> Menu Dish Inventory</h2>
+          <button class="search-btn" id="openAddProductModal"><i class="fas fa-plus"></i> Add Menu Item</button>
+        </div>
+
+        <div class="glass-card" style="padding: 1.5rem; overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Dish Name</th>
+                <th>Kitchen Partner</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ADD RESTAURANT MODAL -->
+  <div id="addRestModal" class="modal">
+    <div class="modal-content">
+      <button class="close" id="closeAddRestModal">&times;</button>
+      <h2>Add New Partner Kitchen</h2>
+      
+      <form id="addRestForm" style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <label for="restNameInput">Restaurant Name</label>
+          <input type="text" id="restNameInput" placeholder="e.g., Pizza King" required>
+        </div>
+        <div class="form-group">
+          <label for="restDescInput">Description</label>
+          <textarea id="restDescInput" placeholder="Write description detailing food specials..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="restCuisinesInput">Cuisines (comma separated)</label>
+          <input type="text" id="restCuisinesInput" placeholder="e.g., Fast Food, Pizza, Desserts" required>
+        </div>
+        <div class="form-group">
+          <label for="restLogoInput">Logo Image Filename</label>
+          <input type="text" id="restLogoInput" placeholder="e.g., dominos/logo.avif" required>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="restDeliveryTime">Delivery Est. (mins)</label>
+            <input type="number" id="restDeliveryTime" value="30" required>
+          </div>
+          <div class="form-group">
+            <label for="restDistance">Distance (km)</label>
+            <input type="number" id="restDistance" step="0.1" value="2.5" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="restRatingInput">Initial Rating</label>
+            <input type="number" id="restRatingInput" min="1" max="5" step="0.1" value="4.5" required>
+          </div>
+          <div class="form-group">
+            <label for="restPriceRange">Cost Range</label>
+            <select id="restPriceRange" aria-label="Cost Range select">
+              <option value="₹">₹ (Affordable)</option>
+              <option value="₹₹" selected>₹₹ (Moderate)</option>
+              <option value="₹₹₹">₹₹₹ (Premium)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Save Partner Kitchen</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD PRODUCT MENU ITEM MODAL -->
+  <div id="addProductModal" class="modal">
+    <div class="modal-content">
+      <button class="close" id="closeAddProductModal">&times;</button>
+      <h2>Add New Dish to Menu</h2>
+      
+      <form id="addProductForm" style="margin-top: 1.5rem;">
+        <div class="form-group">
+          <label for="prodRestSelect">Select Restaurant Partner</label>
+          <select id="prodRestSelect" required aria-label="Select Restaurant Partner">
+            <!-- Loaded dynamically -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="prodCategoryInput">Menu Category</label>
+          <input type="text" id="prodCategoryInput" placeholder="e.g., Cheese Burst, Starters, Main Course" required>
+        </div>
+        <div class="form-group">
+          <label for="prodNameInput">Dish Name</label>
+          <input type="text" id="prodNameInput" placeholder="e.g., Margherita Pizza" required>
+        </div>
+        <div class="form-group">
+          <label for="prodDescInput">Dish Description</label>
+          <textarea id="prodDescInput" placeholder="Write tasty ingredients details..." required></textarea>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="prodPriceInput">Price (₹)</label>
+            <input type="number" id="prodPriceInput" placeholder="e.g., 299" required>
+          </div>
+          <div class="form-group">
+            <label for="prodTypeSelect">Dietary Type</label>
+            <select id="prodTypeSelect" aria-label="Dietary Type">
+              <option value="veg">Vegetarian</option>
+              <option value="nonveg">Non-Vegetarian</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prodImageInput">Image Filename</label>
+          <input type="text" id="prodImageInput" placeholder="e.g., dominos/menu/Farmhouse Pizza.jpg" required>
+        </div>
+
+        <button type="submit" class="place-order-btn">Add Dish to Menu</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Specialized Admin Tab Controls & Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initAdminTabs();
+      renderAnalytics();
+      renderOrders();
+      renderRestaurants();
+      renderProducts();
+      initAdminModals();
+    });
+
+    /* ==========================================
+       1. Admin Sidebar Tab Controls switching
+       ========================================== */
+    function initAdminTabs() {
+      const menuItems = document.querySelectorAll(".admin-menu-item");
+      menuItems.forEach(item => {
+        item.addEventListener("click", () => {
+          const tab = item.dataset.tab;
+          
+          // Switch Active class
+          menuItems.forEach(i => i.classList.remove("active"));
+          item.classList.add("active");
+
+          // Hide all sections
+          document.querySelectorAll(".admin-panel-section").forEach(sec => {
+            sec.classList.remove("active");
+          });
+          
+          const targetSection = document.getElementById(`${tab}Panel`);
+          if (targetSection) targetSection.classList.add("active");
+        });
+      });
+    }
+
+    /* ==========================================
+       2. Render Tab 1: Analytics Values
+       ========================================== */
+    function renderAnalytics() {
+      const orders = window.BiteXpress.getOrders();
+      const restaurants = window.BiteXpress.getRestaurants();
+
+      // Calc stats
+      const totalRevenue = orders.reduce((sum, ord) => {
+        if (ord.status !== "Cancelled") return sum + ord.total;
+        return sum;
+      }, 0);
+
+      document.getElementById("statRevenue").textContent = `₹${totalRevenue.toFixed(2)}`;
+      document.getElementById("statOrders").textContent = orders.length;
+      document.getElementById("statStores").textContent = restaurants.length;
+    }
+
+    /* ==========================================
+       3. Render Tab 2: Orders Management Pipeline
+       ========================================== */
+    function renderOrders() {
+      const tbody = document.getElementById("ordersTableBody");
+      if (!tbody) return;
+
+      const orders = window.BiteXpress.getOrders();
+      tbody.innerHTML = "";
+
+      if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-tertiary);">No orders placed yet.</td></tr>`;
+        return;
+      }
+
+      orders.forEach((order) => {
+        // Build items summary string
+        const itemsSummary = order.items.map(item => `${item.name} (x${item.quantity})`).join(", ");
+
+        const statusClass = order.status.toLowerCase();
+        
+        // Define action controls depending on current pipeline status
+        let actionHTML = "";
+        if (order.status === "Pending") {
+          actionHTML = `
+            <button class="action-btn accept" onclick="updateOrderStatus('${order.orderId}', 'Preparing')">Accept</button>
+            <button class="action-btn cancel" onclick="updateOrderStatus('${order.orderId}', 'Cancelled')">Cancel</button>
+          `;
+        } else if (order.status === "Preparing") {
+          actionHTML = `
+            <button class="action-btn deliver" onclick="updateOrderStatus('${order.orderId}', 'Delivered')">Deliver</button>
+          `;
+        } else {
+          // Delivered or Cancelled, no actions possible
+          actionHTML = `<span style="font-size:0.8rem; color:var(--text-tertiary); font-weight:600;">Archived</span>`;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${order.orderId}</strong></td>
+          <td>
+            <div><strong>${order.name}</strong></div>
+            <div style="font-size:0.75rem; color:var(--text-secondary)"><i class="fas fa-phone-alt"></i> ${order.phone}</div>
+          </td>
+          <td>
+            <div style="font-size:0.85rem; max-width:280px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="${itemsSummary}">${itemsSummary}</div>
+          </td>
+          <td>₹${order.total.toFixed(2)}</td>
+          <td><span class="status-badge ${statusClass}">${order.status}</span></td>
+          <td>${actionHTML}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      const orders = window.BiteXpress.getOrders();
+      const order = orders.find(ord => ord.orderId === orderId);
+      if (order) {
+        order.status = newStatus;
+        window.BiteXpress.setOrders(orders);
+        
+        renderOrders();
+        renderAnalytics(); // Re-calc sales if cancelled/delivered changes
+        window.showToast(`Order ${orderId} updated to ${newStatus}`, "success");
+      }
+    }
+    window.updateOrderStatus = updateOrderStatus; // Export globally
+
+    /* ==========================================
+       4. Render Tab 3: Restaurant Partners
+       ========================================== */
+    function renderRestaurants() {
+      const tbody = document.getElementById("restaurantsTableBody");
+      if (!tbody) return;
+
+      const list = window.BiteXpress.getRestaurants();
+      tbody.innerHTML = "";
+
+      list.forEach((rest) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><img src="${rest.logo}" alt="${rest.name}" style="width:45px; height:45px; object-fit:cover; border-radius:50%; border:1px solid var(--border-color);" onerror="this.src='images/pizza.jpg'"></td>
+          <td><strong>${rest.name}</strong></td>
+          <td style="font-size:0.85rem">${rest.cuisines.join(", ")}</td>
+          <td>${rest.distance} km / ${rest.deliveryTime} mins</td>
+          <td><i class="fas fa-star" style="color:var(--secondary)"></i> ${rest.rating}</td>
+          <td>
+            <button class="action-btn delete" onclick="deleteRestaurant('${rest.id}')">Remove</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Update Select Restaurant input dropdown options inside Products modal form
+      const select = document.getElementById("prodRestSelect");
+      if (select) {
+        select.innerHTML = "";
+        list.forEach(r => {
+          select.innerHTML += `<option value="${r.id}">${r.name}</option>`;
+        });
+      }
+    }
+
+    function deleteRestaurant(id) {
+      if (confirm("Are you sure you want to remove this restaurant partner? All associated menu dishes will also be removed.")) {
+        let list = window.BiteXpress.getRestaurants();
+        list = list.filter(r => r.id !== id);
+        window.BiteXpress.setRestaurants(list);
+        
+        renderRestaurants();
+        renderProducts(); // Re-render dishes to drop orphaned menu items
+        renderAnalytics();
+        window.showToast("Restaurant partner deleted", "remove");
+      }
+    }
+    window.deleteRestaurant = deleteRestaurant;
+
+    /* ==========================================
+       5. Render Tab 4: Menu Dishes inventory
+       ========================================== */
+    function renderProducts() {
+      const tbody = document.getElementById("productsTableBody");
+      if (!tbody) return;
+
+      const restaurants = window.BiteXpress.getRestaurants();
+      tbody.innerHTML = "";
+
+      let count = 0;
+      restaurants.forEach((rest) => {
+        rest.menu.forEach((dish) => {
+          count++;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><img src="${dish.image}" alt="${dish.name}" style="width:40px; height:40px; object-fit:cover; border-radius: var(--radius-sm);" onerror="this.src='images/pizza.jpg'"></td>
+            <td><strong>${dish.name}</strong></td>
+            <td>${rest.name}</td>
+            <td>${dish.category}</td>
+            <td>₹${dish.price}</td>
+            <td><span class="status-badge" style="background:rgba(var(--accent-rgb),0.1); color:var(--accent); text-transform:uppercase; font-size:0.7rem">${dish.isVeg ? 'Veg' : 'Non-Veg'}</span></td>
+            <td>
+              <button class="action-btn delete" onclick="deleteProduct('${rest.id}', '${dish.id}')">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+
+      if (count === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-tertiary);">No menu items found. Add some items!</td></tr>`;
+      }
+    }
+
+    function deleteProduct(restId, dishId) {
+      if (confirm("Are you sure you want to delete this menu dish?")) {
+        const list = window.BiteXpress.getRestaurants();
+        const rest = list.find(r => r.id === restId);
+        if (rest) {
+          rest.menu = rest.menu.filter(d => d.id !== dishId);
+          window.BiteXpress.setRestaurants(list);
+          
+          renderProducts();
+          window.showToast("Dish item deleted successfully", "remove");
+        }
+      }
+    }
+    window.deleteProduct = deleteProduct;
+
+    /* ==========================================
+       6. Modals Operations (Add store / Add product)
+       ========================================== */
+    function initAdminModals() {
+      const addRestModal = document.getElementById("addRestModal");
+      const openAddRestBtn = document.getElementById("openAddRestModal");
+      const closeAddRestBtn = document.getElementById("closeAddRestModal");
+      const addRestForm = document.getElementById("addRestForm");
+
+      // Store triggers
+      if (addRestModal && openAddRestBtn && closeAddRestBtn) {
+        openAddRestBtn.addEventListener("click", () => {
+          addRestModal.classList.add("active");
+        });
+
+        closeAddRestBtn.addEventListener("click", () => {
+          addRestModal.classList.remove("active");
+        });
+      }
+
+      if (addRestForm) {
+        addRestForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          
+          const name = document.getElementById("restNameInput").value.trim();
+          const desc = document.getElementById("restDescInput").value.trim();
+          const cuisinesText = document.getElementById("restCuisinesInput").value.trim();
+          const logo = document.getElementById("restLogoInput").value.trim();
+          const time = parseInt(document.getElementById("restDeliveryTime").value);
+          const dist = parseFloat(document.getElementById("restDistance").value);
+          const rating = parseFloat(document.getElementById("restRatingInput").value);
+          const priceRange = document.getElementById("restPriceRange").value;
+
+          const id = name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+
+          const newRest = {
+            id,
+            name,
+            description: desc,
+            logo,
+            rating,
+            deliveryTime: time,
+            distance: dist,
+            priceRange,
+            priceValue: priceRange.length,
+            hours: "11:00 AM - 11:00 PM",
+            cuisines: cuisinesText.split(",").map(c => c.trim()),
+            categories: [],
+            menu: []
+          };
+
+          const list = window.BiteXpress.getRestaurants();
+          list.push(newRest);
+          window.BiteXpress.setRestaurants(list);
+
+          renderRestaurants();
+          renderAnalytics();
+          addRestForm.reset();
+          addRestModal.classList.remove("active");
+          window.showToast(`Restaurant partner ${name} created!`, "success");
+        });
+      }
+
+      const addProductModal = document.getElementById("addProductModal");
+      const openAddProductBtn = document.getElementById("openAddProductModal");
+      const closeAddProductBtn = document.getElementById("closeAddProductModal");
+      const addProductForm = document.getElementById("addProductForm");
+
+      // Product triggers
+      if (addProductModal && openAddProductBtn && closeAddProductBtn) {
+        openAddProductBtn.addEventListener("click", () => {
+          const list = window.BiteXpress.getRestaurants();
+          if (list.length === 0) {
+            window.showToast("Create a restaurant partner first!", "info");
+            return;
+          }
+          addProductModal.classList.add("active");
+        });
+
+        closeAddProductBtn.addEventListener("click", () => {
+          addProductModal.classList.remove("active");
+        });
+      }
+
+      if (addProductForm) {
+        addProductForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const restId = document.getElementById("prodRestSelect").value;
+          const category = document.getElementById("prodCategoryInput").value.trim();
+          const name = document.getElementById("prodNameInput").value.trim();
+          const desc = document.getElementById("prodDescInput").value.trim();
+          const price = parseFloat(document.getElementById("prodPriceInput").value);
+          const type = document.getElementById("prodTypeSelect").value;
+          const image = document.getElementById("prodImageInput").value.trim();
+
+          const dishId = name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+
+          const newDish = {
+            id: dishId,
+            name,
+            description: desc,
+            price,
+            image,
+            category,
+            rating: 4.5,
+            isVeg: type === "veg",
+            isBestseller: false
+          };
+
+          const list = window.BiteXpress.getRestaurants();
+          const targetRest = list.find(r => r.id === restId);
+          if (targetRest) {
+            // Add Category to restaurant's catalog categories list if new
+            if (!targetRest.categories.includes(category)) {
+              targetRest.categories.push(category);
+            }
+            
+            targetRest.menu.push(newDish);
+            window.BiteXpress.setRestaurants(list);
+
+            renderProducts();
+            addProductForm.reset();
+            addProductModal.classList.remove("active");
+            window.showToast(`Dish ${name} added to ${targetRest.name}!`, "success");
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>

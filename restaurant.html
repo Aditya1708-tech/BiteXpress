@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiteXpress - Restaurant Menu</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BiteXpress Logo" onclick="window.location.href='index.html'">
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html#restaurantsSection" class="active"><i class="fas fa-utensils"></i> Restaurants</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" style="display: none;">0</span></a></li>
+      <li><a href="account.html"><i class="fas fa-user"></i> Account</a></li>
+      <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      <li>
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </li>
+    </ul>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+
+  <!-- Restaurant Hero Banner -->
+  <section class="restaurant-hero" id="restHero">
+    <div class="restaurant-hero-content">
+      <img src="images/pizza.jpg" alt="Restaurant Logo" class="restaurant-hero-logo" id="restLogo">
+      <div class="restaurant-hero-info">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+          <h1 id="restName">Loading Restaurant...</h1>
+          <button class="favorite-btn" id="favRestBtn" style="position: relative; top: 0; right: 0; background: rgba(255, 255, 255, 0.15); color: #ffffff;">
+            <i class="fas fa-heart"></i>
+          </button>
+        </div>
+        <p class="desc" id="restDesc">Loading description...</p>
+        <div class="restaurant-hero-meta">
+          <span id="restRating"><i class="fas fa-star" style="color: var(--secondary)"></i> - </span>
+          <span id="restHours"><i class="far fa-clock"></i> - </span>
+          <span id="restPrice"><i class="fas fa-rupee-sign"></i> - </span>
+          <span id="restDistance"><i class="fas fa-motorcycle"></i> - </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Layout -->
+  <section class="restaurant-menu-layout">
+    <!-- Sidebar category scrollbar -->
+    <aside class="menu-sidebar">
+      <h3 style="margin-bottom: 1.25rem;">Categories</h3>
+      <ul class="menu-category-nav" id="categoryNav">
+        <!-- Rendered dynamically -->
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="menu-content-area">
+      <!-- Search, veg only, sort filter controls -->
+      <div class="list-controls" style="justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">
+        <div class="search-bar-wrapper" style="flex: 1; max-width: 320px; box-shadow: none;">
+          <i class="fas fa-search" style="font-size:0.9rem"></i>
+          <input type="text" id="menuSearchInput" placeholder="Search in menu..." style="font-size:0.95rem">
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+          <div id="menuVegToggle" class="veg-toggle-wrapper">
+            <span class="veg-switch"></span>
+            <span>Veg Only</span>
+          </div>
+
+          <select id="menuSortSelect" class="sort-select" aria-label="Sort dishes menu">
+            <option value="default">Sort: Default</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+            <option value="rating">Rating: Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Injected Category Sections and Dish Cards -->
+      <div id="menuContentContainer" style="margin-top: 1.5rem;">
+        <!-- Rendered dynamically -->
+      </div>
+    </main>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About BiteXpress</h4>
+        <p>BiteXpress is a premium food delivery platform, providing high-fidelity dining convenience and speedy doorstep logistics.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Explore Options</h4>
+        <ul>
+          <li><a href="index.html#restaurantsSection">Popular Restaurants</a></li>
+          <li><a href="admin.html">Manage Platform (Admin)</a></li>
+          <li><a href="account.html">Account Panel</a></li>
+          <li><a href="#">Security Safeguard</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Partner With Us</h4>
+        <ul>
+          <li><a href="#">Join as a Kitchen Partner</a></li>
+          <li><a href="#">Sign up as Delivery Agent</a></li>
+          <li><a href="#">Developer API Integrations</a></li>
+          <li><a href="#">Corporate Lunch Options</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Desk</h4>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> helpdesk@bitxpress.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 101 Tech Hub, Cyber City, IN</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BiteXpress platform. Crafted for high-end portfolio presentations.</p>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar Drawer Overlay & Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <div id="cartDrawer" class="cart">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCart" class="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <ul id="cartList">
+      <!-- Cart items injected here -->
+    </ul>
+    
+    <!-- Coupon Codes Area -->
+    <div class="cart-coupon-area" id="couponArea">
+      <div class="coupon-input-wrapper">
+        <input type="text" id="couponInput" placeholder="ENTER COUPON CODE">
+        <button id="applyCouponBtn" class="coupon-apply-btn">Apply</button>
+      </div>
+    </div>
+
+    <!-- Charges Breakdown -->
+    <div class="cart-footer">
+      <div class="cart-charges-breakdown">
+        <div class="charge-row">
+          <span>Subtotal</span>
+          <span id="subtotalVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>GST (5%)</span>
+          <span id="gstVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>Delivery Fee</span>
+          <span id="deliveryVal">₹0.00</span>
+        </div>
+        <div class="charge-row" id="discountRow" style="display: none; color: var(--accent);">
+          <span>Discount Applied</span>
+          <span id="discountVal">-₹0.00</span>
+        </div>
+        <div class="charge-row total">
+          <span>Grand Total</span>
+          <span id="grandTotalVal">₹0.00</span>
+        </div>
+      </div>
+      
+      <button id="checkoutBtn" class="checkout-btn" disabled>
+        <i class="fas fa-shopping-bag"></i> Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Checkout Form Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <button class="close">&times;</button>
+      <h2>Complete Checkout</h2>
+      
+      <div class="order-summary">
+        <h3>Selected Dishes Summary</h3>
+        <div id="modalCartList"></div>
+        <div id="modalTotal"></div>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter recipient full name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter contact phone number" pattern="[0-9]{10}" required title="Please enter a valid 10 digit number">
+        </div>
+        <div class="form-group">
+          <label for="address">Delivery Address</label>
+          <textarea id="address" placeholder="Flat, Street, Area details..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pincode">Pincode</label>
+          <input type="text" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Choose Payment Method</label>
+          <div class="payment-options">
+            <input type="radio" name="payment" value="cash" id="payCash" checked>
+            <label for="payCash">
+              <i class="fas fa-hand-holding-usd"></i>
+              Cash on Delivery
+            </label>
+            
+            <input type="radio" name="payment" value="card" id="payCard">
+            <label for="payCard">
+              <i class="far fa-credit-card"></i>
+              Card Payment
+            </label>
+
+            <input type="radio" name="payment" value="upi" id="payUpi">
+            <label for="payUpi">
+              <i class="fas fa-mobile-alt"></i>
+              UPI Apps
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order Securely</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact Us Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <button class="close-contact">&times;</button>
+      <h2>Send Feedback or Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="contactName">Full Name</label>
+          <input type="text" id="contactName" required>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" required>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Your Message</label>
+          <textarea id="contactMessage" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Specialized Restaurant Menu Details Rendering -->
+  <script>
+    let activeRestaurant = null;
+    let menuVegOnly = false;
+    let searchFilterText = "";
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      loadRestaurantData();
+      initRestaurantEvents();
+    });
+
+    /* ==========================================
+       1. Load Restaurant Information & Details
+       ========================================== */
+    function loadRestaurantData() {
+      // Parse query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const restId = urlParams.get("id");
+
+      if (!restId) {
+        // Fallback to home if no parameter provided
+        window.location.href = "index.html";
+        return;
+      }
+
+      const restaurants = window.BiteXpress.getRestaurants();
+      activeRestaurant = restaurants.find(r => r.id === restId);
+
+      if (!activeRestaurant) {
+        // Fallback if not found
+        window.location.href = "index.html";
+        return;
+      }
+
+      // 1. Populate Hero details
+      document.title = `${activeRestaurant.name} - BiteXpress Menu`;
+      document.getElementById("restName").textContent = activeRestaurant.name;
+      document.getElementById("restDesc").textContent = activeRestaurant.description;
+      
+      const logoEl = document.getElementById("restLogo");
+      logoEl.src = activeRestaurant.logo;
+      logoEl.alt = activeRestaurant.name;
+      
+      // Update background photo overlay
+      const heroEl = document.getElementById("restHero");
+      heroEl.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85)), url('${activeRestaurant.logo}')`;
+
+      document.getElementById("restRating").innerHTML = `<i class="fas fa-star" style="color: var(--secondary)"></i> ${activeRestaurant.rating} Rating`;
+      document.getElementById("restHours").innerHTML = `<i class="far fa-clock"></i> ${activeRestaurant.hours}`;
+      document.getElementById("restPrice").innerHTML = `<i class="fas fa-rupee-sign"></i> ${activeRestaurant.priceRange} (Average)`;
+      document.getElementById("restDistance").innerHTML = `<i class="fas fa-motorcycle"></i> ${activeRestaurant.distance} km Delivery`;
+
+      // Favorite button highlight
+      const favs = window.BiteXpress.getFavorites();
+      const favBtn = document.getElementById("favRestBtn");
+      if (favs.restaurants.includes(activeRestaurant.id)) {
+        favBtn.classList.add("active");
+        favBtn.style.color = "var(--primary)";
+      }
+
+      // 2. Render Sidebar categories navigation
+      renderCategoriesSidebar();
+
+      // 3. Render Menus & Dishes
+      renderMenuDishes();
+
+      // If specific dish is linked in parameters, scroll to it
+      const targetDishId = urlParams.get("dish");
+      if (targetDishId) {
+        setTimeout(() => {
+          const dishEl = document.getElementById(`dish-${targetDishId}`);
+          if (dishEl) {
+            window.scrollTo({
+              top: dishEl.offsetTop - 120,
+              behavior: "smooth"
+            });
+            dishEl.style.borderColor = "var(--primary)";
+            dishEl.style.boxShadow = "0 0 20px rgba(var(--primary-rgb), 0.15)";
+          }
+        }, 800);
+      }
+    }
+
+    /* ==========================================
+       2. Render Sidebar categories menu list
+       ========================================== */
+    function renderCategoriesSidebar() {
+      const navContainer = document.getElementById("categoryNav");
+      if (!navContainer) return;
+
+      navContainer.innerHTML = "";
+      
+      // Add 'All' option
+      const liAll = document.createElement("li");
+      liAll.className = "menu-category-nav-item active";
+      liAll.textContent = "All Items";
+      liAll.addEventListener("click", () => {
+        highlightCategoryNav(liAll);
+        scrollToCategorySection("all");
+      });
+      navContainer.appendChild(liAll);
+
+      activeRestaurant.categories.forEach(catName => {
+        const li = document.createElement("li");
+        li.className = "menu-category-nav-item";
+        li.textContent = catName;
+        li.addEventListener("click", () => {
+          highlightCategoryNav(li);
+          scrollToCategorySection(catName);
+        });
+        navContainer.appendChild(li);
+      });
+    }
+
+    function highlightCategoryNav(activeElement) {
+      document.querySelectorAll(".menu-category-nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+      activeElement.classList.add("active");
+    }
+
+    function scrollToCategorySection(catName) {
+      if (catName === "all") {
+        window.scrollTo({
+          top: document.getElementById("menuContentContainer").offsetTop - 100,
+          behavior: "smooth"
+        });
+      } else {
+        const targetSection = document.getElementById(`cat-sec-${catName.replace(/[^a-zA-Z0-9]/g, "")}`);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 110,
+            behavior: "smooth"
+          });
+        }
+      }
+    }
+
+    /* ==========================================
+       3. Render Menu Dishes list & cards
+       ========================================== */
+    function renderMenuDishes() {
+      const container = document.getElementById("menuContentContainer");
+      if (!container) return;
+
+      container.innerHTML = "";
+
+      // Group menu items by category
+      activeRestaurant.categories.forEach(catName => {
+        let items = activeRestaurant.menu.filter(dish => dish.category === catName);
+
+        // 1. Veg Filter
+        if (menuVegOnly) {
+          items = items.filter(dish => dish.isVeg);
+        }
+
+        // 2. Search text filter
+        if (searchFilterText) {
+          items = items.filter(dish => 
+            dish.name.toLowerCase().includes(searchFilterText) || 
+            (dish.description && dish.description.toLowerCase().includes(searchFilterText))
+          );
+        }
+
+        // 3. Sorting
+        const sortVal = document.getElementById("menuSortSelect").value;
+        if (sortVal === "priceLow") {
+          items.sort((a, b) => a.price - b.price);
+        } else if (sortVal === "priceHigh") {
+          items.sort((a, b) => b.price - a.price);
+        } else if (sortVal === "rating") {
+          items.sort((a, b) => b.rating - a.rating);
+        }
+
+        if (items.length === 0) return; // Hide empty categories
+
+        // Create Section
+        const sectionDiv = document.createElement("div");
+        sectionDiv.id = `cat-sec-${catName.replace(/[^a-zA-Z0-9]/g, "")}`;
+        
+        const h3 = document.createElement("h3");
+        h3.className = "menu-items-group-heading";
+        h3.textContent = `${catName} (${items.length})`;
+        sectionDiv.appendChild(h3);
+
+        const gridDiv = document.createElement("div");
+        gridDiv.className = "dish-grid";
+
+        items.forEach(dish => {
+          const card = document.createElement("div");
+          card.className = "dish-card-item";
+          card.id = `dish-${dish.id}`;
+          
+          const ratingStars = Array(Math.round(dish.rating)).fill('<i class="fas fa-star" style="color:var(--secondary)"></i>').join("") + 
+                              Array(5 - Math.round(dish.rating)).fill('<i class="far fa-star" style="color:var(--text-tertiary)"></i>').join("");
+
+          card.innerHTML = `
+            <div class="dish-card-details">
+              <div class="dish-type-icon ${dish.isVeg ? 'veg' : 'non-veg'}" title="${dish.isVeg ? 'Veg' : 'Non-Veg'}"></div>
+              <h3>${dish.name}</h3>
+              <div class="price">₹${dish.price.toFixed(2)}</div>
+              <div style="font-size:0.8rem; margin-bottom: 8px;">${ratingStars} <span style="color:var(--text-secondary); margin-left: 4px;">(${dish.rating})</span></div>
+              <p class="desc">${dish.description || 'Tasty and fresh, made by premium culinary experts with home-ground ingredients.'}</p>
+            </div>
+            
+            <div class="dish-card-media-wrapper">
+              <img src="${dish.image}" alt="${dish.name}" onerror="this.src='images/pizza.jpg'">
+              
+              <!-- Add / Qty controls wrapper -->
+              <div class="add-btn-container" 
+                   data-id="${dish.id}" 
+                   data-name="${dish.name}" 
+                   data-price="${dish.price}" 
+                   data-img="${dish.image}" 
+                   data-rest="${activeRestaurant.name}">
+                <!-- Injected dynamically in script.js sync -->
+              </div>
+            </div>
+          `;
+          gridDiv.appendChild(card);
+        });
+
+        sectionDiv.appendChild(gridDiv);
+        container.appendChild(sectionDiv);
+
+        // Sync visual quantity counter values for all added items on render
+        items.forEach(dish => {
+          window.updateStoreQuantitySelector(dish.id);
+        });
+      });
+
+      // No results check
+      if (container.children.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:5rem 2rem; color:var(--text-secondary);">
+            <i class="fas fa-search-minus" style="font-size:3rem; margin-bottom: 1rem; color:var(--text-tertiary);"></i>
+            <h3>No menu items match your filter</h3>
+            <p>Try clearing your menu search or switching off 'Veg Only' mode.</p>
+          </div>
+        `;
+      }
+    }
+
+    /* ==========================================
+       4. Event Listeners for Filters
+       ========================================== */
+    function initRestaurantEvents() {
+      // Favorite restaurant click
+      const favBtn = document.getElementById("favRestBtn");
+      if (favBtn) {
+        favBtn.addEventListener("click", () => {
+          if (!activeRestaurant) return;
+          const active = window.BiteXpress.toggleFavoriteRestaurant(activeRestaurant.id);
+          if (active) {
+            favBtn.classList.add("active");
+            favBtn.style.color = "var(--primary)";
+            window.showToast(`Added ${activeRestaurant.name} to Favorites`, "success");
+          } else {
+            favBtn.classList.remove("active");
+            favBtn.style.color = "#ffffff";
+            window.showToast(`Removed ${activeRestaurant.name} from Favorites`, "remove");
+          }
+        });
+      }
+
+      // Veg toggle inside menu
+      const menuVegToggle = document.getElementById("menuVegToggle");
+      if (menuVegToggle) {
+        menuVegToggle.addEventListener("click", () => {
+          menuVegOnly = !menuVegOnly;
+          menuVegToggle.classList.toggle("active", menuVegOnly);
+          renderMenuDishes();
+        });
+      }
+
+      // Search in menu box
+      const menuSearchInput = document.getElementById("menuSearchInput");
+      if (menuSearchInput) {
+        menuSearchInput.addEventListener("input", (e) => {
+          searchFilterText = e.target.value.trim().toLowerCase();
+          renderMenuDishes();
+        });
+      }
+
+      // Sort menu items select dropdown
+      const menuSortSelect = document.getElementById("menuSortSelect");
+      if (menuSortSelect) {
+        menuSortSelect.addEventListener("change", renderMenuDishes);
+      }
+    }
+  </script>
+</body>
+</html>

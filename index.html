@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BiteXpress</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiteXpress - Refined Food Delivery Platform</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+      <img src="images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BiteXpress Logo" onclick="window.location.href='index.html'">
     </div>
     <ul class="nav-links">
-      <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
-      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+      <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html#restaurantsSection"><i class="fas fa-utensils"></i> Restaurants</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" style="display: none;">0</span></a></li>
       <li><a href="account.html"><i class="fas fa-user"></i> Account</a></li>
       <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      <li>
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </li>
     </ul>
     <div class="burger">
       <div class="line1"></div>
@@ -28,213 +35,284 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-bg-shapes">
+      <div class="hero-shape hero-shape-1"></div>
+      <div class="hero-shape hero-shape-2"></div>
+    </div>
     <div class="hero-content">
-      <h1>Today's Special Offers</h1>
-      <div class="offers-container">
-        <div class="offer-card">
-          <img src="images/burger.jpg" alt="Burger Offer">
-          <div class="offer-details">
-            <h3>Burger King</h3>
-            <p>Buy 1 Get 1 Free on All Burgers</p>
-            <span class="offer-tag">50% OFF</span>
-          </div>
+      <h1>Find the Best Restaurants & Dishes <span>Near You</span></h1>
+      <p>Order food from premium kitchen partners and track delivery right to your doorstep.</p>
+      
+      <!-- Instant Search System -->
+      <div class="search-container">
+        <div class="search-bar-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search restaurants, cuisines, or dishes..." autocomplete="off">
+          <button class="search-btn">Search</button>
         </div>
-        <div class="offer-card">
-          <img src="images/pizza.jpg" alt="Pizza Offer">
-          <div class="offer-details">
-            <h3>Pizza Hut</h3>
-            <p>Large Pizza at Medium Price</p>
-            <span class="offer-tag">30% OFF</span>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="images/pasta.jpg" alt="Pasta Offer">
-          <div class="offer-details">
-            <h3>Italian Bistro</h3>
-            <p>Free Garlic Bread with Every Pasta</p>
-            <span class="offer-tag">FREE</span>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="images/samosa.jpg" alt="Samosa Offer">
-          <div class="offer-details">
-            <h3>Indian Delight</h3>
-            <p>Combo Pack of 10 Samosas</p>
-            <span class="offer-tag">20% OFF</span>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="images/pani_puri.JPG" alt="Pani Puri Offer">
-          <div class="offer-details">
-            <h3>Street Food</h3>
-            <p>Unlimited Pani Puri for 2</p>
-            <span class="offer-tag">40% OFF</span>
-          </div>
-        </div>
-        <div class="offer-card">
-          <img src="images/chocolate_brownie.jpg" alt="Dessert Offer">
-          <div class="offer-details">
-            <h3>Sweet Treats</h3>
-            <p>Brownie with Ice Cream</p>
-            <span class="offer-tag">25% OFF</span>
-          </div>
-        </div>
-      </div>
-      <div class="offer-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
+        <div id="searchResultsDropdown" class="search-results-dropdown"></div>
       </div>
     </div>
   </section>
 
-  <!-- Hotel Ronak Card -->
-  <section class="featured-restaurant">
-    <div class="restaurant-card">
-      <div class="restaurant-image">
-        <img src="hotel ronak/ronak logo.avif" alt="Hotel Ronak">
+  <!-- Popular Food Categories -->
+  <section class="categories-section">
+    <div class="section-header">
+      <h2>Popular Categories</h2>
+    </div>
+    <div class="categories-container">
+      <div class="category-card" data-category="Pizza">
+        <img src="images/pizza.jpg" alt="Pizza">
+        <span>Pizzas</span>
       </div>
-      <div class="restaurant-details">
-        <h2>Hotel Ronak</h2>
-        <p class="restaurant-description">Experience authentic Indian cuisine in a luxurious setting. Our chefs prepare traditional dishes with a modern twist, using the finest ingredients.</p>
-        <div class="restaurant-features">
-          <span><i class="fas fa-star"></i> 4.5 Rating</span>
-          <span><i class="fas fa-clock"></i> 11:00 AM - 11:00 PM</span>
-          <span><i class="fas fa-rupee-sign"></i> ₹₹₹ (Moderate)</span>
-        </div>
-        <a href="hotel ronak/menu.html" class="view-menu-btn">View Menu</a>
+      <div class="category-card" data-category="Biryani">
+        <img src="images/samosa.jpg" alt="Biryani" style="object-fit: cover; border-radius: 50%;">
+        <span>Biryani</span>
+      </div>
+      <div class="category-card" data-category="Burger">
+        <img src="images/burger.jpg" alt="Burger">
+        <span>Burgers</span>
+      </div>
+      <div class="category-card" data-category="Momos">
+        <img src="images/momos.jpg" alt="Momos">
+        <span>Momos</span>
+      </div>
+      <div class="category-card" data-category="Dessert">
+        <img src="images/Rajbhog.png" alt="Dessert">
+        <span>Desserts</span>
+      </div>
+      <div class="category-card" data-category="Fast Food">
+        <img src="images/fries.jpg" alt="Fast Food">
+        <span>Fast Food</span>
       </div>
     </div>
   </section>
 
-  <!-- Dominos Card -->
-  <section class="featured-restaurant">
-    <div class="restaurant-card">
-      <div class="restaurant-image">
-        <img src="dominos/logo.avif" alt="Dominos">
+  <!-- Promotional Offer Slideshow Slider -->
+  <section class="offers-section">
+    <div class="offers-carousel-wrapper">
+      <div class="offers-container" id="offersContainer">
+        <!-- Rendered Dynamically -->
       </div>
-      <div class="restaurant-details">
-        <h2>Dominos</h2>
-        <p class="restaurant-description">Enjoy the world's best pizzas with our signature crust and fresh toppings. Fast delivery and hot, delicious pizzas every time.</p>
-        <div class="restaurant-features">
-          <span><i class="fas fa-star"></i> 4.8 Rating</span>
-          <span><i class="fas fa-clock"></i> 10:00 AM - 12:00 AM</span>
-          <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
+    </div>
+    <div class="offer-dots" id="offerDots">
+      <!-- Rendered Dynamically -->
+    </div>
+  </section>
+
+  <!-- Restaurants Main Feed -->
+  <section class="restaurants-section" id="restaurantsSection">
+    <div class="section-header">
+      <h2>Popular Restaurants</h2>
+      <div class="list-controls">
+        <select id="sortSelect" class="sort-select" aria-label="Sort restaurants list">
+          <option value="default">Sort: Popularity</option>
+          <option value="rating">Rating: High to Low</option>
+          <option value="time">Delivery Time: Fast First</option>
+          <option value="distance">Distance: Nearest First</option>
+        </select>
+        
+        <div id="vegToggle" class="veg-toggle-wrapper">
+          <span class="veg-switch"></span>
+          <span>Veg Only</span>
         </div>
-        <a href="dominos/dominos_menu.html" class="view-menu-btn">View Menu</a>
+      </div>
+    </div>
+
+    <!-- Active Grid Feed -->
+    <div class="restaurants-grid" id="restaurantsGrid">
+      <!-- Rendered dynamically -->
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="section-header" style="justify-content: center;">
+      <h2 style="text-align: center;">What Customers Say</h2>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid">
+      <!-- Rendered dynamically from localStorage database -->
+    </div>
+  </section>
+
+  <!-- Download App CTA Banner -->
+  <section class="download-section">
+    <div class="download-banner">
+      <div class="download-text">
+        <h2>Enjoy BiteXpress on the Go!</h2>
+        <p>Get the most premium experience on mobile. Download the BiteXpress app for faster checkouts, live order tracking, and exclusive discounts.</p>
+        <div class="app-buttons">
+          <a href="#" class="app-btn">
+            <i class="fab fa-apple"></i>
+            <div class="app-btn-text">
+              <span>Download on the</span>
+              <span>App Store</span>
+            </div>
+          </a>
+          <a href="#" class="app-btn">
+            <i class="fab fa-google-play"></i>
+            <div class="app-btn-text">
+              <span>GET IT ON</span>
+              <span>Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="download-image">
+        <img src="images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="Mobile App preview" style="border-radius: var(--radius-md);">
       </div>
     </div>
   </section>
 
-  <!-- Sukhsagar Hotel Card -->
-  <section class="featured-restaurant">
-    <div class="restaurant-card">
-      <div class="restaurant-image">
-        <img src="sukhsagar pizz hub/logo.avif" alt="Sukhsagar Hotel">
-      </div>
-      <div class="restaurant-details">
-        <h2>Sukhsagar Pizza Hub</h2>
-        <p class="restaurant-description">Experience authentic South Indian cuisine in a traditional setting. Known for our delicious dosas, idlis, and filter coffee.</p>
-        <div class="restaurant-features">
-          <span><i class="fas fa-star"></i> 4.7 Rating</span>
-          <span><i class="fas fa-clock"></i> 7:00 AM - 11:00 PM</span>
-          <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About BiteXpress</h4>
+        <p>BiteXpress is a premium food delivery startup MVP, providing high-fidelity dining convenience and speedy doorstep logistics.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <a href="sukhsagar pizz hub/index.html" class="view-menu-btn">View Menu</a>
+      </div>
+      <div class="footer-section">
+        <h4>Explore Options</h4>
+        <ul>
+          <li><a href="#restaurantsSection">Popular Restaurants</a></li>
+          <li><a href="admin.html">Manage Platform (Admin)</a></li>
+          <li><a href="account.html">Account Panel</a></li>
+          <li><a href="#">Security Safeguard</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Partner With Us</h4>
+        <ul>
+          <li><a href="#">Join as a Kitchen Partner</a></li>
+          <li><a href="#">Sign up as Delivery Agent</a></li>
+          <li><a href="#">Developer API Integrations</a></li>
+          <li><a href="#">Corporate Lunch Options</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Desk</h4>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> helpdesk@bitxpress.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 101 Tech Hub, Cyber City, IN</p>
       </div>
     </div>
-  </section>
-
-  <!-- Dear Momo Card -->
-  <section class="featured-restaurant">
-    <div class="restaurant-card">
-      <div class="restaurant-image">
-        <img src="dear momo/logo.avif" alt="Dear Momo">
-      </div>
-      <div class="restaurant-details">
-        <h2>Dear Momo</h2>
-        <p class="restaurant-description">Indulge in authentic Himalayan flavors with our handcrafted momos and Tibetan delicacies. Made with love and traditional recipes.</p>
-        <div class="restaurant-features">
-          <span><i class="fas fa-star"></i> 4.9 Rating</span>
-          <span><i class="fas fa-clock"></i> 11:00 AM - 10:30 PM</span>
-          <span><i class="fas fa-rupee-sign"></i> ₹₹ (Affordable)</span>
-        </div>
-        <a href="Dear Momo/index.html" class="view-menu-btn">View Menu</a>
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BiteXpress platform. Crafted for high-end portfolio presentations.</p>
     </div>
-  </section>
+  </footer>
 
-  <!-- Hotel Silver Palace Card -->
-  <section class="featured-restaurant">
-    <div class="restaurant-card">
-      <div class="restaurant-image">
-        <img src="hotel silver palace/logo.avif" alt="Hotel Silver Palace">
-      </div>
-      <div class="restaurant-details">
-        <h2>Hotel Silver Palace</h2>
-        <p class="restaurant-description">Experience royal dining with our exquisite North Indian and Mughlai cuisine. Known for our rich curries, tandoori specialties, and warm hospitality.</p>
-        <div class="restaurant-features">
-          <span><i class="fas fa-star"></i> 4.6 Rating</span>
-          <span><i class="fas fa-clock"></i> 12:00 PM - 11:30 PM</span>
-          <span><i class="fas fa-rupee-sign"></i> ₹₹₹ (Moderate)</span>
-        </div>
-        <a href="hotel silver palace/index.html" class="view-menu-btn">View Menu</a>
-      </div>
+  <!-- Cart Sidebar Drawer Overlay & Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <div id="cartDrawer" class="cart">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCart" class="close-cart"><i class="fas fa-times"></i></button>
     </div>
-  </section>
+    
+    <ul id="cartList">
+      <!-- Cart items injected here -->
+    </ul>
+    
+    <!-- Coupon Codes Area -->
+    <div class="cart-coupon-area" id="couponArea">
+      <div class="coupon-input-wrapper">
+        <input type="text" id="couponInput" placeholder="ENTER COUPON CODE">
+        <button id="applyCouponBtn" class="coupon-apply-btn">Apply</button>
+      </div>
+      <!-- Applied coupon status display -->
+    </div>
 
-  <div class="menu" id="menu"></div>
-
-  <div class="cart">
-    <h2>Your Cart <span class="close-cart">&times;</span></h2>
-    <ul id="cartList"></ul>
-    <div class="cart-total">
-      <span id="total">Total: ₹0.00</span>
-      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    <!-- Charges Breakdown -->
+    <div class="cart-footer">
+      <div class="cart-charges-breakdown">
+        <div class="charge-row">
+          <span>Subtotal</span>
+          <span id="subtotalVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>GST (5%)</span>
+          <span id="gstVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>Delivery Fee</span>
+          <span id="deliveryVal">₹0.00</span>
+        </div>
+        <div class="charge-row" id="discountRow" style="display: none; color: var(--accent);">
+          <span>Discount Applied</span>
+          <span id="discountVal">-₹0.00</span>
+        </div>
+        <div class="charge-row total">
+          <span>Grand Total</span>
+          <span id="grandTotalVal">₹0.00</span>
+        </div>
+      </div>
+      
+      <button id="checkoutBtn" class="checkout-btn" disabled>
+        <i class="fas fa-shopping-bag"></i> Proceed to Checkout
+      </button>
     </div>
   </div>
 
-  <!-- Checkout Modal -->
+  <!-- Checkout Form Modal -->
   <div id="checkoutModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Checkout</h2>
+      <button class="close">&times;</button>
+      <h2>Complete Checkout</h2>
       
       <div class="order-summary">
-        <h3>Order Summary</h3>
+        <h3>Selected Dishes Summary</h3>
         <div id="modalCartList"></div>
-        <div class="modal-total">
-          <span id="modalTotal">Total: ₹0.00</span>
-        </div>
+        <div id="modalTotal"></div>
       </div>
 
       <form id="checkoutForm">
         <div class="form-group">
-          <h3>Delivery Address</h3>
-          <input type="text" id="fullName" placeholder="Full Name" required>
-          <input type="tel" id="phone" placeholder="Phone Number" required>
-          <textarea id="address" placeholder="Delivery Address" required></textarea>
-          <input type="text" id="pincode" placeholder="Pincode" required>
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter recipient full name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter contact phone number" pattern="[0-9]{10}" required title="Please enter a valid 10 digit number">
+        </div>
+        <div class="form-group">
+          <label for="address">Delivery Address</label>
+          <textarea id="address" placeholder="Flat, Street, Area details..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pincode">Pincode</label>
+          <input type="text" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
         </div>
 
         <div class="form-group">
-          <h3>Payment Method</h3>
+          <label>Choose Payment Method</label>
           <div class="payment-options">
-            <label>
-              <input type="radio" name="payment" value="cash" checked>
+            <input type="radio" name="payment" value="cash" id="payCash" checked>
+            <label for="payCash">
+              <i class="fas fa-hand-holding-usd"></i>
               Cash on Delivery
             </label>
-            <label>
-              <input type="radio" name="payment" value="card">
-              Credit/Debit Card
+            
+            <input type="radio" name="payment" value="card" id="payCard">
+            <label for="payCard">
+              <i class="far fa-credit-card"></i>
+              Card Payment
             </label>
-            <label>
-              <input type="radio" name="payment" value="upi">
-              UPI
+
+            <input type="radio" name="payment" value="upi" id="payUpi">
+            <label for="payUpi">
+              <i class="fas fa-mobile-alt"></i>
+              UPI Apps
             </label>
           </div>
         </div>
 
-        <button type="submit" class="place-order-btn">Place Order</button>
+        <button type="submit" class="place-order-btn">Place Order Securely</button>
       </form>
     </div>
   </div>
@@ -242,69 +320,308 @@
   <!-- Contact Us Modal -->
   <div id="contactModal" class="modal">
     <div class="modal-content">
-      <span class="close-contact">&times;</span>
-      <h2>Contact Us</h2>
+      <button class="close-contact">&times;</button>
+      <h2>Send Feedback or Message</h2>
       <form id="contactForm">
         <div class="form-group">
-          <input type="text" id="contactName" placeholder="Your Name" required>
+          <label for="contactName">Full Name</label>
+          <input type="text" id="contactName" required>
         </div>
         <div class="form-group">
-          <input type="email" id="contactEmail" placeholder="Your Email" required>
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" required>
         </div>
         <div class="form-group">
-          <input type="text" id="contactSubject" placeholder="Subject" required>
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" required>
         </div>
         <div class="form-group">
-          <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+          <label for="contactMessage">Your Message</label>
+          <textarea id="contactMessage" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
     </div>
   </div>
 
+  <!-- Core JavaScript Libraries -->
+  <script src="data.js"></script>
   <script src="script.js"></script>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>About Us</h4>
-        <p>BiteXpress delivers delicious food right to your doorstep. Enjoy the best dining experience with our quality service.</p>
-      </div>
-      
-      <div class="footer-section">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Menu</a></li>
-          <li><a href="#">Order Now</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
+  <!-- Landing Page Custom Render & Interaction Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPromotionalOffers();
+      renderLandingRestaurants();
+      renderTestimonials();
+      initLandingEvents();
+    });
 
-      <div class="footer-section">
-        <h4>Contact Info</h4>
-        <ul>
-          <li><i class="fas fa-phone"></i> +91 123-456-7890</li>
-          <li><i class="fas fa-envelope"></i> info@bitxpress.com</li>
-          <li><i class="fas fa-map-marker-alt"></i> 123 Food Street, City, State</li>
-        </ul>
-      </div>
+    /* ==========================================
+       1. Render Offers Slide Carousel
+       ========================================== */
+    let offerSlideIndex = 0;
+    let offerSlideTimer = null;
 
-      <div class="footer-section">
-        <h4>Follow Us</h4>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+    function renderPromotionalOffers() {
+      const coupons = window.BiteXpress.getCoupons();
+      const container = document.getElementById("offersContainer");
+      const dotsContainer = document.getElementById("offerDots");
+      if (!container || !dotsContainer) return;
+
+      container.innerHTML = "";
+      dotsContainer.innerHTML = "";
+
+      const mockImages = [
+        "images/burger.jpg",
+        "images/pizza.jpg",
+        "images/pasta.jpg"
+      ];
+
+      coupons.forEach((coupon, i) => {
+        // Create Offer Slide card
+        const card = document.createElement("div");
+        card.className = `offer-card ${i === 0 ? 'active' : ''}`;
+        card.innerHTML = `
+          <div class="offer-card-content">
+            <span class="offer-tag">ACTIVE PROMO</span>
+            <h3>${coupon.desc}</h3>
+            <p>Use code below at the checkout drawer to claim this discount!</p>
+            <span class="offer-code-badge"><i class="fas fa-tag"></i> ${coupon.code}</span>
+          </div>
+          <img src="${mockImages[i % mockImages.length]}" alt="Offer Food Image">
+        `;
+        container.appendChild(card);
+
+        // Create Navigation Dot
+        const dot = document.createElement("span");
+        dot.className = `dot ${i === 0 ? 'active' : ''}`;
+        dot.addEventListener("click", () => showOfferSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      // Auto start carousel
+      startOfferSlideTimer();
+    }
+
+    function showOfferSlide(index) {
+      stopOfferSlideTimer();
+      const slides = document.querySelectorAll(".offer-card");
+      const dots = document.querySelectorAll(".dot");
+      if (slides.length === 0) return;
+
+      // Adjust wraps
+      offerSlideIndex = (index + slides.length) % slides.length;
+
+      slides.forEach(slide => slide.classList.remove("active"));
+      dots.forEach(dot => dot.classList.remove("active"));
+
+      slides[offerSlideIndex].classList.add("active");
+      if (dots[offerSlideIndex]) dots[offerSlideIndex].classList.add("active");
+
+      startOfferSlideTimer();
+    }
+
+    function startOfferSlideTimer() {
+      offerSlideTimer = setInterval(() => {
+        showOfferSlide(offerSlideIndex + 1);
+      }, 4000);
+    }
+
+    function stopOfferSlideTimer() {
+      if (offerSlideTimer) clearInterval(offerSlideTimer);
+    }
+
+    /* ==========================================
+       2. Render Restaurants List & Grid
+       ========================================== */
+    let vegOnlyMode = false;
+    let selectedCategoryFilter = "";
+
+    function renderLandingRestaurants() {
+      const grid = document.getElementById("restaurantsGrid");
+      if (!grid) return;
+
+      // Show shimmer loading effect first
+      grid.innerHTML = Array(3).fill().map(() => `
+        <div class="restaurant-card-item skeleton">
+          <div style="height: 200px; width: 100%;"></div>
+          <div style="padding: 1.5rem;">
+            <div style="height: 20px; width: 60%; margin-bottom: 8px;"></div>
+            <div style="height: 15px; width: 80%; margin-bottom: 12px;"></div>
+            <div style="height: 35px; width: 100%;"></div>
+          </div>
         </div>
-      </div>
-    </div>
+      `).join("");
 
-    <div class="footer-bottom">
-      <p>&copy; 2024 BiteXpress. All rights reserved.</p>
-    </div>
-  </footer>
+      // Simulate a small network load for UI polish
+      setTimeout(() => {
+        let list = window.BiteXpress.getRestaurants();
+
+        // 1. Filter: Veg Only Mode
+        if (vegOnlyMode) {
+          // A restaurant counts as veg-only if it only has veg items or contains "Veg" in cuisines
+          list = list.filter(r => r.cuisines.includes("South Indian") || r.cuisines.includes("Tibetan") || r.menu.some(item => item.isVeg));
+        }
+
+        // 2. Filter: Category quick click
+        if (selectedCategoryFilter) {
+          list = list.filter(r => 
+            r.cuisines.some(c => c.toLowerCase().includes(selectedCategoryFilter.toLowerCase())) ||
+            r.menu.some(item => item.category.toLowerCase().includes(selectedCategoryFilter.toLowerCase()) || item.name.toLowerCase().includes(selectedCategoryFilter.toLowerCase()))
+          );
+        }
+
+        // 3. Sorting logic
+        const sortVal = document.getElementById("sortSelect").value;
+        if (sortVal === "rating") {
+          list.sort((a, b) => b.rating - a.rating);
+        } else if (sortVal === "time") {
+          list.sort((a, b) => a.deliveryTime - b.deliveryTime);
+        } else if (sortVal === "distance") {
+          list.sort((a, b) => a.distance - b.distance);
+        }
+
+        grid.innerHTML = "";
+        if (list.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
+              <i class="fas fa-store-slash" style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-tertiary);"></i>
+              <h3>No matching restaurants found</h3>
+              <p>Try resetting filters or checking your search query.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const favs = window.BiteXpress.getFavorites();
+
+        list.forEach((rest) => {
+          const isFav = favs.restaurants.includes(rest.id);
+          const hasDiscountBadge = rest.id === "dominos" || rest.id === "hotel_ronak";
+          const badgeText = rest.id === "dominos" ? "50% OFF" : (rest.id === "hotel_ronak" ? "₹100 OFF" : "");
+
+          const card = document.createElement("div");
+          card.className = "restaurant-card-item";
+          card.innerHTML = `
+            <div class="restaurant-card-img-wrapper">
+              <img src="${rest.logo}" alt="${rest.name}" onerror="this.src='images/pizza.jpg'">
+              ${hasDiscountBadge ? `<div class="restaurant-card-badge">${badgeText}</div>` : ""}
+              <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${rest.id}" onclick="event.stopPropagation(); toggleFavRest('${rest.id}', this)" aria-label="Add to favorites">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+            
+            <div class="restaurant-card-content" onclick="window.location.href='restaurant.html?id=${rest.id}'" style="cursor: pointer;">
+              <div class="restaurant-card-title">
+                <h3>${rest.name}</h3>
+                <span class="restaurant-rating-pill"><i class="fas fa-star" style="font-size:0.8rem"></i> ${rest.rating}</span>
+              </div>
+              <div class="restaurant-card-tags">${rest.cuisines.join(", ")}</div>
+              
+              <div class="restaurant-card-meta">
+                <span><i class="far fa-clock"></i> ${rest.deliveryTime} mins</span>
+                <span><i class="fas fa-map-marker-alt"></i> ${rest.distance} km</span>
+                <span>${rest.priceRange}</span>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }, 600);
+    }
+
+    function toggleFavRest(id, element) {
+      const active = window.BiteXpress.toggleFavoriteRestaurant(id);
+      if (active) {
+        element.classList.add("active");
+        window.showToast("Added to favorites!", "success");
+      } else {
+        element.classList.remove("active");
+        window.showToast("Removed from favorites", "remove");
+      }
+    }
+    window.toggleFavRest = toggleFavRest; // Export globally
+
+    /* ==========================================
+       3. Render Reviews/Testimonials
+       ========================================== */
+    function renderTestimonials() {
+      const reviews = window.BiteXpress.getReviews();
+      const container = document.getElementById("testimonialsGrid");
+      if (!container) return;
+
+      container.innerHTML = "";
+      reviews.forEach(review => {
+        const initial = review.user.charAt(0);
+        const starsHTML = Array(review.rating).fill('<i class="fas fa-star"></i>').join("") + 
+                          Array(5 - review.rating).fill('<i class="far fa-star"></i>').join("");
+
+        const card = document.createElement("div");
+        card.className = "testimonial-card glass-card";
+        card.innerHTML = `
+          <div class="testimonial-user">
+            <div class="testimonial-user-avatar">${initial}</div>
+            <div class="testimonial-user-details">
+              <h4>${review.user}</h4>
+              <div class="rating">${starsHTML}</div>
+            </div>
+          </div>
+          <p>"${review.comment}"</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* ==========================================
+       4. Event Listeners initialization
+       ========================================== */
+    function initLandingEvents() {
+      // Veg Only Switch Toggle
+      const vegToggle = document.getElementById("vegToggle");
+      if (vegToggle) {
+        vegToggle.addEventListener("click", () => {
+          vegOnlyMode = !vegOnlyMode;
+          vegToggle.classList.toggle("active", vegOnlyMode);
+          renderLandingRestaurants();
+        });
+      }
+
+      // Sort option dropdown change
+      const sortSelect = document.getElementById("sortSelect");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", renderLandingRestaurants);
+      }
+
+      // Category Card Click handlers
+      const categoryCards = document.querySelectorAll(".category-card");
+      categoryCards.forEach(card => {
+        card.addEventListener("click", () => {
+          const filter = card.dataset.category;
+          if (selectedCategoryFilter === filter) {
+            // Un-toggle
+            selectedCategoryFilter = "";
+            card.classList.remove("active");
+          } else {
+            // Remove previous active state
+            categoryCards.forEach(c => c.classList.remove("active"));
+            selectedCategoryFilter = filter;
+            card.classList.add("active");
+          }
+
+          renderLandingRestaurants();
+
+          // Smooth scroll to feed
+          const feedSection = document.getElementById("restaurantsSection");
+          if (feedSection) {
+            window.scrollTo({
+              top: feedSection.offsetTop - 90,
+              behavior: "smooth"
+            });
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>

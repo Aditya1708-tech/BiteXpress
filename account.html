@@ -1,147 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account - BitExpress</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiteXpress - Account Workspace</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    .account-container {
-      max-width: 500px;
-      margin: 100px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-toggle {
-      display: flex;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #eee;
-    }
-
-    .form-toggle button {
-      flex: 1;
-      padding: 15px;
-      border: none;
-      background: none;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .form-toggle button.active {
-      color: #ff6b6b;
-      border-bottom: 2px solid #ff6b6b;
-      margin-bottom: -2px;
-    }
-
-    .form-container {
-      display: none;
-    }
-
-    .form-container.active {
-      display: block;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-      font-size: 16px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-      margin-top: 5px;
-      background-color: white;
-      color: #333;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #ff6b6b;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 12px;
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .submit-btn:hover {
-      background: #ff5252;
-    }
-
-    .error-message {
-      color: #ff6b6b;
-      font-size: 14px;
-      margin-top: 5px;
-      display: none;
-    }
-
-    .social-login {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .social-login p {
-      margin-bottom: 15px;
-      color: #666;
-    }
-
-    .social-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .social-btn {
-      padding: 10px 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .social-btn:hover {
-      background: #f5f5f5;
-    }
-
-    .social-btn i {
-      margin-right: 8px;
-    }
-  </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="/images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BitExpress Logo">
+      <img src="images/BiteXpress_Logo_on_Black_Background-removebg-preview.png" alt="BiteXpress Logo" onclick="window.location.href='index.html'">
     </div>
     <ul class="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="index.html#menu"><i class="fas fa-utensils"></i> Menu</a></li>
-      <li><a href="index.html" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount">0</span></a></li>
+      <li><a href="index.html#restaurantsSection"><i class="fas fa-utensils"></i> Restaurants</a></li>
+      <li><a href="#" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" style="display: none;">0</span></a></li>
       <li><a href="account.html" class="active"><i class="fas fa-user"></i> Account</a></li>
-      <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+      <li><a href="#" id="contactLink"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      <li>
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </li>
     </ul>
     <div class="burger">
       <div class="line1"></div>
@@ -150,125 +33,611 @@
     </div>
   </nav>
 
-  <div class="account-container">
-    <div class="form-toggle">
-      <button class="active" onclick="toggleForm('login')">Login</button>
-      <button onclick="toggleForm('signup')">Sign Up</button>
+  <!-- SCREEN A: AUTHENTICATION LOGIN/SIGNUP PANELS (Visible when not logged in) -->
+  <div id="authContainer" class="auth-split-layout" style="display: none;">
+    <!-- Visual aesthetic left banner -->
+    <div class="auth-visual-side">
+      <h1>Taste and Speed in One Bite.</h1>
+      <p style="font-size: 1.15rem; opacity: 0.9; margin-bottom: 2rem;">Sign up or log in to track active orders, save custom delivery addresses, claim promotional vouchers, and write reviews!</p>
+      <div style="font-size: 0.9rem; opacity: 0.7;"><i class="fas fa-shield-alt"></i> Encrypted Secure Connection</div>
     </div>
+    
+    <!-- Active form right banner -->
+    <div class="auth-form-side">
+      <div class="auth-card glass-card">
+        <div class="auth-tab-buttons">
+          <button class="auth-tab-btn active" id="tabLoginBtn">Login</button>
+          <button class="auth-tab-btn" id="tabSignupBtn">Sign Up</button>
+        </div>
 
-    <div id="loginForm" class="form-container active">
-      <form id="login">
-        <div class="form-group">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" placeholder="Enter your email address" required>
-          <div class="error-message" id="loginEmailError"></div>
+        <!-- LOGIN PANEL -->
+        <div class="auth-form-panel active" id="loginPanel">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <input type="email" id="loginEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="place-order-btn" style="margin-top: 0.5rem;">Access My Account</button>
+          </form>
+          
+          <div style="text-align: center; margin: 1.5rem 0 0.5rem; color: var(--text-tertiary); font-size: 0.85rem;">Or continue with</div>
+          <div class="social-auth-grid">
+            <button class="social-login-btn" onclick="mockSocialAuth('Google')"><i class="fab fa-google" style="color:#de5246"></i> Google</button>
+            <button class="social-login-btn" onclick="mockSocialAuth('Facebook')"><i class="fab fa-facebook" style="color:#3b5998"></i> Facebook</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" placeholder="Enter your password" required>
-          <div class="error-message" id="loginPasswordError"></div>
-        </div>
-        <button type="submit" class="submit-btn">Login</button>
-      </form>
 
-      <div class="social-login">
-        <p>Or login with</p>
-        <div class="social-buttons">
-          <button class="social-btn"><i class="fab fa-google"></i> Google</button>
-          <button class="social-btn"><i class="fab fa-facebook"></i> Facebook</button>
+        <!-- SIGN UP PANEL -->
+        <div class="auth-form-panel" id="signupPanel">
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input type="text" id="signupName" placeholder="e.g. Aditya Kumar" required>
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email Address</label>
+              <input type="email" id="signupEmail" placeholder="e.g. aditya@domain.com" required>
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input type="password" id="signupPassword" placeholder="Create robust password" required>
+              <div class="pwd-strength-bar">
+                <div class="pwd-strength-fill" id="pwdStrengthBar"></div>
+              </div>
+              <div id="pwdFeedback" style="font-size:0.75rem; color:var(--text-tertiary); margin-top:2px;">Type at least 6 characters</div>
+            </div>
+            <div class="form-group">
+              <label for="signupConfirmPassword">Confirm Password</label>
+              <input type="password" id="signupConfirmPassword" placeholder="Repeat password" required>
+            </div>
+            <button type="submit" class="place-order-btn" style="margin-top: 0.5rem;">Register Account</button>
+          </form>
         </div>
-      </div>
-    </div>
 
-    <div id="signupForm" class="form-container">
-      <form id="signup">
-        <div class="form-group">
-          <label for="signupName">Full Name</label>
-          <input type="text" id="signupName" placeholder="Enter your full name" required>
-          <div class="error-message" id="signupNameError"></div>
-        </div>
-        <div class="form-group">
-          <label for="signupEmail">Email</label>
-          <input type="email" id="signupEmail" placeholder="Enter your email address" required>
-          <div class="error-message" id="signupEmailError"></div>
-        </div>
-        <div class="form-group">
-          <label for="signupPassword">Password</label>
-          <input type="password" id="signupPassword" placeholder="Create a password" required>
-          <div class="error-message" id="signupPasswordError"></div>
-        </div>
-        <div class="form-group">
-          <label for="signupConfirmPassword">Confirm Password</label>
-          <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
-          <div class="error-message" id="signupConfirmPasswordError"></div>
-        </div>
-        <button type="submit" class="submit-btn">Sign Up</button>
-      </form>
-
-      <div class="social-login">
-        <p>Or sign up with</p>
-        <div class="social-buttons">
-          <button class="social-btn"><i class="fab fa-google"></i> Google</button>
-          <button class="social-btn"><i class="fab fa-facebook"></i> Facebook</button>
-        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    function toggleForm(formType) {
-      // Update active button
-      document.querySelectorAll('.form-toggle button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
+  <!-- SCREEN B: LOGGED IN USER ACCOUNT PROFILE DASHBOARD (Visible when logged in) -->
+  <div id="profileContainer" class="profile-dashboard" style="display: none;">
+    <!-- Profile card & left nav -->
+    <aside class="profile-card glass-card">
+      <div class="profile-avatar" id="profileAvatar">A</div>
+      <h3 id="profileNameDisplay">User Name</h3>
+      <p id="profileEmailDisplay">user@email.com</p>
+      
+      <ul class="profile-nav-list">
+        <li class="profile-nav-item active" id="navProfileTab"><i class="fas fa-user-cog"></i> Profile Settings</li>
+        <li class="profile-nav-item" id="navHistoryTab"><i class="fas fa-history"></i> Order History</li>
+        <li class="profile-nav-item" id="logOutBtn" style="color: var(--primary); margin-top: 1rem;"><i class="fas fa-sign-out-alt"></i> Log Out</li>
+      </ul>
+    </aside>
 
-      // Show selected form
-      document.querySelectorAll('.form-container').forEach(form => {
-        form.classList.remove('active');
-      });
-      document.getElementById(formType + 'Form').classList.add('active');
+    <!-- Detailed panel right side -->
+    <main class="profile-content-area">
+      <!-- SETTINGS PANEL -->
+      <section id="settingsPanel" style="display: block;">
+        <h2>Personal Delivery Settings</h2>
+        
+        <form id="profileUpdateForm" class="glass-card" style="padding: 2rem; margin-top: 1rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group">
+              <label for="profName">Full Name</label>
+              <input type="text" id="profName" required>
+            </div>
+            <div class="form-group">
+              <label for="profPhone">Phone Number</label>
+              <input type="tel" id="profPhone" pattern="[0-9]{10}" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="profAddress">Default Delivery Address</label>
+            <textarea id="profAddress" required></textarea>
+          </div>
+          
+          <div class="form-group" style="max-width: 250px;">
+            <label for="profPincode">Pincode</label>
+            <input type="text" id="profPincode" pattern="[0-9]{6}" required>
+          </div>
+
+          <button type="submit" class="place-order-btn" style="max-width: 200px; margin-top: 1rem;">Save Address Book</button>
+        </form>
+      </section>
+
+      <!-- ORDER HISTORY PANEL -->
+      <section id="historyPanel" style="display: none;">
+        <h2>Previous Orders</h2>
+        <div id="orderHistoryList" style="margin-top: 1rem;">
+          <!-- Loaded dynamically -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About BiteXpress</h4>
+        <p>BiteXpress is a premium food delivery platform, providing high-fidelity dining convenience and speedy doorstep logistics.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Explore Options</h4>
+        <ul>
+          <li><a href="index.html#restaurantsSection">Popular Restaurants</a></li>
+          <li><a href="admin.html">Manage Platform (Admin)</a></li>
+          <li><a href="account.html">Account Panel</a></li>
+          <li><a href="#">Security Safeguard</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Partner With Us</h4>
+        <ul>
+          <li><a href="#">Join as a Kitchen Partner</a></li>
+          <li><a href="#">Sign up as Delivery Agent</a></li>
+          <li><a href="#">Developer API Integrations</a></li>
+          <li><a href="#">Corporate Lunch Options</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Desk</h4>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> helpdesk@bitxpress.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 101 Tech Hub, Cyber City, IN</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 BiteXpress platform. Crafted for high-end portfolio presentations.</p>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar Drawer Overlay & Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <div id="cartDrawer" class="cart">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCart" class="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <ul id="cartList">
+      <!-- Cart items injected here -->
+    </ul>
+    
+    <!-- Coupon Codes Area -->
+    <div class="cart-coupon-area" id="couponArea">
+      <div class="coupon-input-wrapper">
+        <input type="text" id="couponInput" placeholder="ENTER COUPON CODE">
+        <button id="applyCouponBtn" class="coupon-apply-btn">Apply</button>
+      </div>
+    </div>
+
+    <!-- Charges Breakdown -->
+    <div class="cart-footer">
+      <div class="cart-charges-breakdown">
+        <div class="charge-row">
+          <span>Subtotal</span>
+          <span id="subtotalVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>GST (5%)</span>
+          <span id="gstVal">₹0.00</span>
+        </div>
+        <div class="charge-row">
+          <span>Delivery Fee</span>
+          <span id="deliveryVal">₹0.00</span>
+        </div>
+        <div class="charge-row" id="discountRow" style="display: none; color: var(--accent);">
+          <span>Discount Applied</span>
+          <span id="discountVal">-₹0.00</span>
+        </div>
+        <div class="charge-row total">
+          <span>Grand Total</span>
+          <span id="grandTotalVal">₹0.00</span>
+        </div>
+      </div>
+      
+      <button id="checkoutBtn" class="checkout-btn" disabled>
+        <i class="fas fa-shopping-bag"></i> Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Checkout Form Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <button class="close">&times;</button>
+      <h2>Complete Checkout</h2>
+      
+      <div class="order-summary">
+        <h3>Selected Dishes Summary</h3>
+        <div id="modalCartList"></div>
+        <div id="modalTotal"></div>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter recipient full name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter contact phone number" pattern="[0-9]{10}" required title="Please enter a valid 10 digit number">
+        </div>
+        <div class="form-group">
+          <label for="address">Delivery Address</label>
+          <textarea id="address" placeholder="Flat, Street, Area details..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pincode">Pincode</label>
+          <input type="text" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Choose Payment Method</label>
+          <div class="payment-options">
+            <input type="radio" name="payment" value="cash" id="payCash" checked>
+            <label for="payCash">
+              <i class="fas fa-hand-holding-usd"></i>
+              Cash on Delivery
+            </label>
+            
+            <input type="radio" name="payment" value="card" id="payCard">
+            <label for="payCard">
+              <i class="far fa-credit-card"></i>
+              Card Payment
+            </label>
+
+            <input type="radio" name="payment" value="upi" id="payUpi">
+            <label for="payUpi">
+              <i class="fas fa-mobile-alt"></i>
+              UPI Apps
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order Securely</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact Us Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <button class="close-contact">&times;</button>
+      <h2>Send Feedback or Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="contactName">Full Name</label>
+          <input type="text" id="contactName" required>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" required>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Your Message</label>
+          <textarea id="contactMessage" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Account authentication logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      checkActiveUserSession();
+      initAccountTabs();
+      initAuthForms();
+    });
+
+    /* ==========================================
+       1. View Switcher based on Active Session
+       ========================================== */
+    function checkActiveUserSession() {
+      const activeUser = window.BiteXpress.getActiveUser();
+      
+      const authContainer = document.getElementById("authContainer");
+      const profileContainer = document.getElementById("profileContainer");
+
+      if (activeUser) {
+        authContainer.style.display = "none";
+        profileContainer.style.display = "grid";
+        
+        // Populate profile metadata card
+        document.getElementById("profileNameDisplay").textContent = activeUser.name;
+        document.getElementById("profileEmailDisplay").textContent = activeUser.email;
+        document.getElementById("profileAvatar").textContent = activeUser.name.charAt(0).toUpperCase();
+
+        // Populate forms fields
+        document.getElementById("profName").value = activeUser.name || "";
+        document.getElementById("profPhone").value = activeUser.phone || "";
+        document.getElementById("profAddress").value = activeUser.address || "";
+        document.getElementById("profPincode").value = activeUser.pincode || "";
+
+        renderOrderHistory();
+      } else {
+        authContainer.style.display = "grid";
+        profileContainer.style.display = "none";
+      }
     }
 
-    // Form validation and submission
-    document.getElementById('login').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
+    /* ==========================================
+       2. Auth Tab Buttons togglers (Login / Signup)
+       ========================================== */
+    function initAccountTabs() {
+      const tabLoginBtn = document.getElementById("tabLoginBtn");
+      const tabSignupBtn = document.getElementById("tabSignupBtn");
+      const loginPanel = document.getElementById("loginPanel");
+      const signupPanel = document.getElementById("signupPanel");
+
+      if (tabLoginBtn && tabSignupBtn) {
+        tabLoginBtn.addEventListener("click", () => {
+          tabLoginBtn.classList.add("active");
+          tabSignupBtn.classList.remove("active");
+          loginPanel.classList.add("active");
+          signupPanel.classList.remove("active");
+        });
+
+        tabSignupBtn.addEventListener("click", () => {
+          tabSignupBtn.classList.add("active");
+          tabLoginBtn.classList.remove("active");
+          signupPanel.classList.add("active");
+          loginPanel.classList.remove("active");
+        });
+      }
+
+      // Logged in Dashboard internal tabs
+      const navProfileTab = document.getElementById("navProfileTab");
+      const navHistoryTab = document.getElementById("navHistoryTab");
+      const settingsPanel = document.getElementById("settingsPanel");
+      const historyPanel = document.getElementById("historyPanel");
+
+      if (navProfileTab && navHistoryTab) {
+        navProfileTab.addEventListener("click", () => {
+          navProfileTab.classList.add("active");
+          navHistoryTab.classList.remove("active");
+          settingsPanel.style.display = "block";
+          historyPanel.style.display = "none";
+        });
+
+        navHistoryTab.addEventListener("click", () => {
+          navHistoryTab.classList.add("active");
+          navProfileTab.classList.remove("active");
+          historyPanel.style.display = "block";
+          settingsPanel.style.display = "none";
+          renderOrderHistory();
+        });
+      }
+
+      // Log out button
+      const logOutBtn = document.getElementById("logOutBtn");
+      if (logOutBtn) {
+        logOutBtn.addEventListener("click", () => {
+          window.BiteXpress.logout();
+          checkActiveUserSession();
+          window.showToast("Logged out successfully", "remove");
+        });
+      }
+    }
+
+    /* ==========================================
+       3. Auth Form Handlers (Login / Register / Update)
+       ========================================== */
+    function initAuthForms() {
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+      const profileUpdateForm = document.getElementById("profileUpdateForm");
+
+      // Password strength listener
+      const passwordInput = document.getElementById("signupPassword");
+      const strengthBar = document.getElementById("pwdStrengthBar");
+      const feedback = document.getElementById("pwdFeedback");
+
+      if (passwordInput && strengthBar && feedback) {
+        passwordInput.addEventListener("input", (e) => {
+          const val = e.target.value;
+          let strength = 0;
+          let feedbackText = "Weak";
+          let fillColor = "#ff4d4d"; // Red
+
+          if (val.length >= 6) {
+            strength = 33;
+            if (/[a-zA-Z]/.test(val) && /[0-9]/.test(val)) {
+              strength = 66;
+              feedbackText = "Medium";
+              fillColor = "#ffb703"; // Orange/Yellow
+            }
+            if (/[!@#$%^&*]/.test(val) && val.length >= 8) {
+              strength = 100;
+              feedbackText = "Strong";
+              fillColor = "#2a9d8f"; // Green
+            }
+          } else {
+            feedbackText = "Too short (min 6 chars)";
+          }
+
+          strengthBar.style.width = `${strength}%`;
+          strengthBar.style.backgroundColor = fillColor;
+          feedback.textContent = feedbackText;
+          feedback.style.color = fillColor;
+        });
+      }
+
+      // Handle login action
+      if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const email = document.getElementById("loginEmail").value.trim();
+          const pwd = document.getElementById("loginPassword").value;
+
+          // Simple local authentication mock check
+          const mockUser = {
+            name: email.split("@")[0].toUpperCase(),
+            email: email,
+            phone: "9876543210",
+            address: "102 Bakers Street, IT Hub, Sector 4",
+            pincode: "400013"
+          };
+
+          window.BiteXpress.setActiveUser(mockUser);
+          checkActiveUserSession();
+          window.showToast("Welcome back!", "success");
+        });
+      }
+
+      // Handle sign up action
+      if (signupForm) {
+        signupForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.getElementById("signupName").value.trim();
+          const email = document.getElementById("signupEmail").value.trim();
+          const pwd = document.getElementById("signupPassword").value;
+          const confirmPwd = document.getElementById("signupConfirmPassword").value;
+
+          if (pwd.length < 6) {
+            window.showToast("Password must be at least 6 characters", "info");
+            return;
+          }
+
+          if (pwd !== confirmPwd) {
+            window.showToast("Passwords do not match", "remove");
+            return;
+          }
+
+          const newUser = {
+            name,
+            email,
+            phone: "",
+            address: "",
+            pincode: ""
+          };
+
+          window.BiteXpress.setActiveUser(newUser);
+          checkActiveUserSession();
+          window.showToast("Registration complete!", "success");
+        });
+      }
+
+      // Handle settings update action
+      if (profileUpdateForm) {
+        profileUpdateForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          
+          const activeUser = window.BiteXpress.getActiveUser();
+          if (!activeUser) return;
+
+          activeUser.name = document.getElementById("profName").value.trim();
+          activeUser.phone = document.getElementById("profPhone").value.trim();
+          activeUser.address = document.getElementById("profAddress").value.trim();
+          activeUser.pincode = document.getElementById("profPincode").value.trim();
+
+          window.BiteXpress.setActiveUser(activeUser);
+          checkActiveUserSession();
+          window.showToast("Profile address updated", "success");
+        });
+      }
+    }
+
+    function mockSocialAuth(provider) {
+      const email = `${provider.toLowerCase()}User@auth.com`;
+      const mockUser = {
+        name: `${provider} Guest`,
+        email: email,
+        phone: "",
+        address: "",
+        pincode: ""
+      };
+      window.BiteXpress.setActiveUser(mockUser);
+      checkActiveUserSession();
+      window.showToast(`Logged in via ${provider}`, "success");
+    }
+    window.mockSocialAuth = mockSocialAuth;
+
+    /* ==========================================
+       4. Render User Order History list details
+       ========================================== */
+    function renderOrderHistory() {
+      const container = document.getElementById("orderHistoryList");
+      if (!container) return;
+
+      const activeUser = window.BiteXpress.getActiveUser();
+      const allOrders = window.BiteXpress.getOrders();
       
-      // Basic validation
-      if (!email || !password) {
-        alert('Please fill in all fields');
+      // Filter orders by active user name (since we are doing local mock user tracking)
+      const userOrders = allOrders.filter(ord => 
+        ord.name.toLowerCase() === activeUser.name.toLowerCase() || 
+        ord.phone === activeUser.phone
+      );
+
+      container.innerHTML = "";
+      
+      if (userOrders.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card" style="text-align: center; padding: 3rem 1.5rem; color: var(--text-tertiary);">
+            <i class="fas fa-history" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+            <h3>No orders found</h3>
+            <p>Go to the home page or restaurants to place your first order!</p>
+          </div>
+        `;
         return;
       }
 
-      // Here you would typically make an API call to your backend
-      console.log('Login attempt:', { email, password });
-      // Redirect to home page or show success message
-    });
+      userOrders.forEach(order => {
+        const dateStr = new Date(order.date).toLocaleDateString("en-IN", {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
 
-    document.getElementById('signup').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('signupName').value;
-      const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value;
-      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+        const statusClass = order.status.toLowerCase();
 
-      // Validation
-      if (!name || !email || !password || !confirmPassword) {
-        alert('Please fill in all fields');
-        return;
-      }
+        const card = document.createElement("div");
+        card.className = "order-history-card";
+        
+        let itemsHTML = "";
+        order.items.forEach(item => {
+          itemsHTML += `
+            <div class="order-history-item-row">
+              <span style="color:var(--text-secondary)">${item.name} <strong>x${item.quantity}</strong></span>
+              <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+          `;
+        });
 
-      if (password !== confirmPassword) {
-        alert('Passwords do not match');
-        return;
-      }
-
-      // Here you would typically make an API call to your backend
-      console.log('Signup attempt:', { name, email, password });
-      // Redirect to home page or show success message
-    });
+        card.innerHTML = `
+          <div class="order-history-header">
+            <span>ID: <strong style="color:var(--primary)">${order.orderId}</strong></span>
+            <span style="font-size: 0.85rem; color: var(--text-tertiary);">${dateStr}</span>
+          </div>
+          <div class="order-history-items">
+            ${itemsHTML}
+          </div>
+          <div class="order-history-footer">
+            <span class="status-badge ${statusClass}">${order.status}</span>
+            <span class="total">Total Paid: ₹${order.total.toFixed(2)}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
   </script>
 </body>
-</html> 
+</html>
